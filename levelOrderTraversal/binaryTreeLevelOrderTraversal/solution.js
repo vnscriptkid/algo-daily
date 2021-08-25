@@ -1,32 +1,32 @@
-const Queue = require("collections/deque");
+const Queue = require("collections/deque")
 
 class Node {
   constructor(val, left = null, right = null) {
-    this.val = val;
-    this.left = left;
-    this.right = right;
+    this.val = val
+    this.left = left
+    this.right = right
   }
 }
 
 function traverse(root) {
-  const queue = new Queue();
-  queue.push(root);
+  const queue = new Queue()
+  queue.push(root)
 
-  const result = [];
+  const result = []
   while (queue.length > 0) {
-    let levelSize = queue.length;
+    let levelSize = queue.length
 
-    const currentLevel = [];
+    const currentLevel = []
     // Process all nodes from current level
     for (let i = 0; i < levelSize; i++) {
-      let node = queue.shift();
-      if (node.left) queue.push(node.left);
-      if (node.right) queue.push(node.right);
-      currentLevel.push(node.val);
+      let node = queue.shift()
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
+      currentLevel.push(node.val)
     }
-    result.push(currentLevel);
+    result.push(currentLevel)
   }
-  return result;
+  return result
 }
 
-module.exports = { Node, traverse };
+module.exports = {Node, traverse}

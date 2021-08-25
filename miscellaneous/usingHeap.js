@@ -1,15 +1,15 @@
-const Heap = require("collections/heap");
+const Heap = require("collections/heap")
 
 function findkthSmallest(nums, k) {
-  const maxHeap = new Heap([], null, (a, b) => a - b);
+  const maxHeap = new Heap([], null, (a, b) => a - b)
 
   for (let [index, num] of nums.entries()) {
-    maxHeap.push(num);
+    maxHeap.push(num)
 
-    if (index > k - 1) maxHeap.pop();
+    if (index > k - 1) maxHeap.pop()
   }
 
-  return maxHeap.peek();
+  return maxHeap.peek()
 }
 
-module.exports = { findkthSmallest };
+module.exports = {findkthSmallest}

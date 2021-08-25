@@ -1,56 +1,56 @@
-const Queue = require("collections/deque");
+const Queue = require("collections/deque")
 
 function compareWords(word1, word2) {
-  let i = 0;
-  while (word1[i] === word2[i]) i++;
-  return [word1[i], word2[i]];
+  let i = 0
+  while (word1[i] === word2[i]) i++
+  return [word1[i], word2[i]]
 }
 
 function findCorrectOrder(words) {
   // build the graph, indegrees
-  const graph = new Map();
-  const indegrees = {};
+  const graph = new Map()
+  const indegrees = {}
   for (let [index, curWord] of words.entries()) {
     // skip the last one
-    if (index === words.length - 1) break;
+    if (index === words.length - 1) break
 
-    const nextWord = words[index + 1];
-    const [fromChar, toChar] = compareWords(curWord, nextWord);
+    const nextWord = words[index + 1]
+    const [fromChar, toChar] = compareWords(curWord, nextWord)
     // update graph
-    if (!graph.has(fromChar)) graph.set(fromChar, []);
-    if (!graph.has(toChar)) graph.set(toChar, []);
+    if (!graph.has(fromChar)) graph.set(fromChar, [])
+    if (!graph.has(toChar)) graph.set(toChar, [])
 
     if (graph.get(fromChar).indexOf(toChar) === -1) {
-      graph.get(fromChar).push(toChar);
+      graph.get(fromChar).push(toChar)
 
       // update indegrees
-      if (!(toChar in indegrees)) indegrees[toChar] = 0;
-      if (!(fromChar in indegrees)) indegrees[fromChar] = 0;
-      indegrees[toChar] += 1;
+      if (!(toChar in indegrees)) indegrees[toChar] = 0
+      if (!(fromChar in indegrees)) indegrees[fromChar] = 0
+      indegrees[toChar] += 1
     }
   }
 
   // find sources
-  const sources = new Queue();
+  const sources = new Queue()
   for (let [toChar, count] of Object.entries(indegrees)) {
-    if (count === 0) sources.push(toChar);
+    if (count === 0) sources.push(toChar)
   }
 
   // find correct order
-  let result = "";
+  let result = ""
   while (sources.length) {
-    const char = sources.shift();
+    const char = sources.shift()
 
-    result += char;
+    result += char
 
     for (let nextChar of graph.get(char)) {
-      indegrees[nextChar] -= 1;
+      indegrees[nextChar] -= 1
 
-      if (indegrees[nextChar] === 0) sources.add(nextChar);
+      if (indegrees[nextChar] === 0) sources.add(nextChar)
     }
   }
 
-  return result;
+  return result
 }
 
-module.exports = { findCorrectOrder };
+module.exports = {findCorrectOrder}

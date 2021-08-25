@@ -1,19 +1,19 @@
 function findMissingNumber(arr) {
-  const n = arr.length + 1;
+  const n = arr.length + 1
 
   // xor all numbers from 1 to n
-  let x = 1;
+  let x = 1
   for (let i = 2; i <= n; i++) {
-    x = x ^ i;
+    x = x ^ i
   }
 
   // xor all numbers in arr
-  let y = arr[0];
+  let y = arr[0]
   for (let i = 1; i < arr.length; i++) {
-    y = y ^ arr[i];
+    y = y ^ arr[i]
   }
 
-  return x ^ y;
+  return x ^ y
 }
 
-module.exports = { findMissingNumber };
+module.exports = {findMissingNumber}

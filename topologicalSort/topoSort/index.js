@@ -1,45 +1,45 @@
-const Queue = require("collections/deque");
+const Queue = require("collections/deque")
 
 function topoSort(vertices, edges) {
   // build graph using adjacency list
   // traverse graph, build indegree map that counts # of incomming vertices of each vertex
-  const graph = new Map();
-  const inDegrees = new Map();
+  const graph = new Map()
+  const inDegrees = new Map()
 
   for (let vertex of Array(vertices).keys()) {
-    graph.set(vertex, []);
-    inDegrees.set(vertex, 0);
+    graph.set(vertex, [])
+    inDegrees.set(vertex, 0)
   }
 
   for (let [from, to] of edges) {
-    graph.get(from).push(to);
+    graph.get(from).push(to)
 
-    inDegrees.set(to, inDegrees.get(to) + 1);
+    inDegrees.set(to, inDegrees.get(to) + 1)
   }
 
   // push all vertices with no incomming vertex to sources
-  const sources = new Queue();
+  const sources = new Queue()
   for (let [vertex, indeg] of inDegrees.entries()) {
-    if (indeg === 0) sources.push(vertex);
+    if (indeg === 0) sources.push(vertex)
   }
 
-  const sortedList = [];
+  const sortedList = []
 
   // as long as there's still something in sources
   while (sources.length) {
-    const curVertex = sources.shift();
+    const curVertex = sources.shift()
 
-    sortedList.push(curVertex);
+    sortedList.push(curVertex)
 
     for (let neighbor of graph.get(curVertex)) {
-      inDegrees.set(neighbor, inDegrees.get(neighbor) - 1);
+      inDegrees.set(neighbor, inDegrees.get(neighbor) - 1)
 
-      if (inDegrees.get(neighbor) === 0) sources.push(neighbor);
+      if (inDegrees.get(neighbor) === 0) sources.push(neighbor)
     }
   }
 
   // return sorted list
-  return sortedList;
+  return sortedList
 }
 
-module.exports = { topoSort };
+module.exports = {topoSort}

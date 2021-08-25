@@ -1,4 +1,4 @@
-const { topoSort } = require("./index");
+const {topoSort} = require("./index")
 
 test("it works 1", () => {
   const vertices = 5,
@@ -8,10 +8,10 @@ test("it works 1", () => {
       [2, 0],
       [2, 1],
       [3, 1],
-    ];
-  const result = topoSort(vertices, edges);
-  expect(result).toEqual([4, 2, 3, 0, 1]);
-});
+    ]
+  const result = topoSort(vertices, edges)
+  expect(result).toEqual([4, 2, 3, 0, 1])
+})
 
 test("it works 2", () => {
   const vertices = 7,
@@ -24,7 +24,7 @@ test("it works 2", () => {
       [3, 1],
       [3, 2],
       [4, 1],
-    ];
-  const result = topoSort(vertices, edges);
-  expect(result).toEqual([5, 6, 3, 4, 0, 2, 1]);
-});
+    ]
+  const result = topoSort(vertices, edges)
+  expect(result).toEqual([5, 6, 3, 4, 0, 2, 1])
+})

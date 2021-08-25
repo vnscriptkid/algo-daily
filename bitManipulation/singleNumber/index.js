@@ -1,11 +1,11 @@
 function findSingleNumber(arr) {
-  let xor = 0;
+  let xor = 0
 
   for (let number of arr) {
-    xor = xor ^ number;
+    xor = xor ^ number
   }
 
-  return xor;
+  return xor
 }
 
-module.exports = { findSingleNumber };
+module.exports = {findSingleNumber}

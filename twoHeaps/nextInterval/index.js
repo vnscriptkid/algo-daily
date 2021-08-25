@@ -16,37 +16,37 @@ Output: [2, -1, -1]
 Explanation: The next interval of [3,4] is [4,6] which has index ‘2’. There is no next interval for [1,5] and [4,6].
 */
 
-const Heap = require("collections/heap");
+const Heap = require("collections/heap")
 
 function findNextIntervals(intervals) {
-  const result = Array(intervals.length).fill(-1);
+  const result = Array(intervals.length).fill(-1)
 
-  const maxEndTime = new Heap([], null, (a, b) => a[0] - b[0]);
-  const maxStartTime = new Heap([], null, (a, b) => a[0] - b[0]);
+  const maxEndTime = new Heap([], null, (a, b) => a[0] - b[0])
+  const maxStartTime = new Heap([], null, (a, b) => a[0] - b[0])
 
   for (let [index, interval] of intervals.entries()) {
-    const [start, end] = interval;
-    maxStartTime.push([start, index]);
-    maxEndTime.push([end, index]);
+    const [start, end] = interval
+    maxStartTime.push([start, index])
+    maxEndTime.push([end, index])
   }
 
   while (maxEndTime.length) {
-    const [curEnd, index] = maxEndTime.pop();
+    const [curEnd, index] = maxEndTime.pop()
 
-    let nextStart, nextIndex;
+    let nextStart, nextIndex
 
     while (maxStartTime.length && maxStartTime.peek()[0] >= curEnd) {
-      [nextStart, nextIndex] = maxStartTime.pop();
+      ;[nextStart, nextIndex] = maxStartTime.pop()
     }
 
     if (nextStart) {
-      result[index] = nextIndex;
+      result[index] = nextIndex
       // push back
-      maxStartTime.push([nextStart, nextIndex]);
+      maxStartTime.push([nextStart, nextIndex])
     }
   }
 
-  return result;
+  return result
 }
 
-module.exports = { findNextIntervals };
+module.exports = {findNextIntervals}

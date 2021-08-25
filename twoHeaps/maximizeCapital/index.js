@@ -21,12 +21,12 @@ Next, we will select the fourth project, giving us a profit of 5.
 After selecting the three projects, our total capital will be 8 (1+2+5).
 */
 
-const Heap = require("collections/heap");
+const Heap = require("collections/heap")
 
 class Project {
   constructor(capital, profit) {
-    this.capital = capital;
-    this.profit = profit;
+    this.capital = capital
+    this.profit = profit
   }
 }
 
@@ -34,34 +34,34 @@ function maximizeCapital(
   projectCapitals,
   projectProfits,
   myCapital,
-  totalProjects
+  totalProjects,
 ) {
   // maxHeap to access project with most profit
-  const maxHeap = new Heap([], null, (a, b) => a.profit - b.profit);
+  const maxHeap = new Heap([], null, (a, b) => a.profit - b.profit)
   // minHeap to access project with least capital
-  const minHeap = new Heap([], null, (a, b) => b.capital - a.capital);
+  const minHeap = new Heap([], null, (a, b) => b.capital - a.capital)
 
   // push all projects to minHeap
   for (let [index, capitalNeeded] of projectCapitals.entries()) {
-    let profit = projectProfits[index];
-    minHeap.push(new Project(capitalNeeded, profit));
+    let profit = projectProfits[index]
+    minHeap.push(new Project(capitalNeeded, profit))
   }
 
   while (totalProjects > 0) {
     // take out all projects less than myCapital
     while (minHeap.length && minHeap.peek().capital <= myCapital) {
-      maxHeap.push(minHeap.pop());
+      maxHeap.push(minHeap.pop())
     }
 
-    if (maxHeap.length === 0) break;
+    if (maxHeap.length === 0) break
 
     // invest on the project that has most profit
-    myCapital += maxHeap.pop().profit;
+    myCapital += maxHeap.pop().profit
 
-    totalProjects--;
+    totalProjects--
   }
 
-  return myCapital;
+  return myCapital
 }
 
-module.exports = { maximizeCapital };
+module.exports = {maximizeCapital}

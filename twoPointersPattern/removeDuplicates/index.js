@@ -1,19 +1,19 @@
 function removeDuplicates(arr) {
   let cur = 1,
-    nextNonDuplicate = 1;
+    nextNonDuplicate = 1
 
   while (cur < arr.length) {
-    const lastNonDuplicateVal = arr[nextNonDuplicate - 1];
+    const lastNonDuplicateVal = arr[nextNonDuplicate - 1]
     if (arr[cur] !== lastNonDuplicateVal) {
       // expand non-duplicate part
-      arr[nextNonDuplicate] = arr[cur];
-      nextNonDuplicate++;
+      arr[nextNonDuplicate] = arr[cur]
+      nextNonDuplicate++
     }
-    cur++;
+    cur++
   }
 
-  arr.splice(nextNonDuplicate);
-  return arr.length;
+  arr.splice(nextNonDuplicate)
+  return arr.length
 }
 
-module.exports = { removeDuplicates };
+module.exports = {removeDuplicates}

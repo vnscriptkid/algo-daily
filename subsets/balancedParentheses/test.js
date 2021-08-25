@@ -1,8 +1,8 @@
-const { generateBalancedParen } = require("./index");
+const {generateBalancedParen} = require("./index")
 
 test("it works 1", () => {
-  const n = 3;
-  const result = generateBalancedParen(n);
+  const n = 3
+  const result = generateBalancedParen(n)
 
-  expect(result).toEqual(["((()))", "(()())", "(())()", "()(())", "()()()"]);
-});
+  expect(result).toEqual(["((()))", "(()())", "(())()", "()(())", "()()()"])
+})

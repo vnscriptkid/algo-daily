@@ -1,17 +1,17 @@
 function findDistinctSubsets(nums) {
-  const subsets = [];
-  subsets.push([]);
+  const subsets = []
+  subsets.push([])
 
   for (let curNum of nums) {
-    const n = subsets.length;
+    const n = subsets.length
     for (let i = 0; i < n; i++) {
-      const existingSubset = subsets[i];
-      const newSubset = [...existingSubset, curNum];
-      subsets.push(newSubset);
+      const existingSubset = subsets[i]
+      const newSubset = [...existingSubset, curNum]
+      subsets.push(newSubset)
     }
   }
 
-  return subsets;
+  return subsets
 }
 
-module.exports = { findDistinctSubsets };
+module.exports = {findDistinctSubsets}

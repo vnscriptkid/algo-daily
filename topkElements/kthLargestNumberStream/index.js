@@ -1,27 +1,27 @@
-const Heap = require("collections/heap");
+const Heap = require("collections/heap")
 
 class Stream {
   constructor(nums, k) {
-    this.k = k;
-    this.minHeap = new Heap([], null, (a, b) => b - a);
-    this.init(nums);
+    this.k = k
+    this.minHeap = new Heap([], null, (a, b) => b - a)
+    this.init(nums)
   }
 
   init(nums) {
     for (let num of nums) {
-      this.add(num);
+      this.add(num)
     }
   }
 
-  add = (val) => {
-    this.minHeap.add(val);
+  add = val => {
+    this.minHeap.add(val)
 
     if (this.minHeap.length > this.k) {
-      this.minHeap.pop();
+      this.minHeap.pop()
     }
 
-    return this.minHeap.peek();
-  };
+    return this.minHeap.peek()
+  }
 }
 
-module.exports = { Stream };
+module.exports = {Stream}

@@ -1,21 +1,21 @@
 function getAveragesSubarray(arr, k) {
   let left = 0,
-    right = 0;
-  let curSum = 0;
-  let averages = [];
+    right = 0
+  let curSum = 0
+  let averages = []
   while (right < arr.length) {
-    curSum += arr[right];
+    curSum += arr[right]
 
-    let subarraySize = right - left + 1;
+    let subarraySize = right - left + 1
     if (subarraySize === k) {
-      averages.push(curSum / k);
-      curSum -= arr[left];
-      left++;
+      averages.push(curSum / k)
+      curSum -= arr[left]
+      left++
     }
     // expand the window
-    right++;
+    right++
   }
-  return averages;
+  return averages
 }
 
-module.exports = { getAveragesSubarray };
+module.exports = {getAveragesSubarray}
