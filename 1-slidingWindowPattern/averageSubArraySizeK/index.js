@@ -1,5 +1,3 @@
-function getAveragesSubarray() {
+function getAveragesSubarray() {}
 
-}
-
-module.exports = getAveragesSubarray;
+module.exports = getAveragesSubarray
