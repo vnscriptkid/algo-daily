@@ -6,7 +6,9 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint",
-    "prettier": "prettier **/*.js"
+    "prettier": "prettier \"**/*.+(js|json)\"",
+    "validate": "npm run lint && npm run prettier -- --list-different",
+    "format": "npm run prettier -- --write"
   },
   "jest": {
     "testEnvironment": "node"
