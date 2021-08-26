@@ -9,8 +9,8 @@
     "test": "jest",
     "lint": "eslint . --fix --ext .js,.ts",
     "prettier": "prettier \"**/*.+(js|json|ts)\"",
-    "check-format": "prettier \"**/*.+(js|json|ts)\" -- --list-different",
-    "validate": "npm-run-all --parallel check-types lint prettier check-format",
+    "check-format": "npm run prettier -- --list-different",
+    "validate": "npm-run-all --parallel check-types lint check-format",
     "format": "npm run prettier -- --write",
     "prepare": "husky install",
     "lint-staged": "lint-staged"
