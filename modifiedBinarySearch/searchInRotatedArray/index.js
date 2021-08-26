@@ -1,4 +1,4 @@
-function findMax(arr, key) {
+function findMax(arr) {
   let left = 0,
     right = arr.length - 1
   let middle

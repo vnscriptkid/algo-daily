@@ -43,8 +43,4 @@ function scheduleTasks(tasks, k) {
   return intervals
 }
 
-const tasks = ["a", "a", "a", "b", "c", "c"],
-  K = 2
-const result = scheduleTasks(tasks, K)
-
 module.exports = {scheduleTasks}

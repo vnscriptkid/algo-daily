@@ -10,7 +10,7 @@ function findkPairs(l1, l2, k) {
     }
   }
 
-  return minHeap.content.map(([sum, num1, num2]) => [num1, num2])
+  return minHeap.content.map(([, num1, num2]) => [num1, num2])
 }
 
 module.exports = {findkPairs}

@@ -15,8 +15,8 @@ test("it works 2", () => {
 })
 
 test("it works 3", () => {
-  const str = "cbbebi"
-  k = 3
+  const str = "cbbebi",
+    k = 3
   const result = findLongestSubstr(str, k)
   expect(result).toEqual(5)
 })

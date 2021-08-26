@@ -11,7 +11,8 @@ function findSquaresSum(num) {
 }
 
 function isHappyNumber(num) {
-  let slow = (fast = num)
+  let slow = num,
+    fast = num
 
   do {
     slow = findSquaresSum(slow)

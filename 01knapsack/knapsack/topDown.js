@@ -1,9 +1,6 @@
 function findBestCombination(profits, weights, capacity) {
-  let count = 0
   const cache = {}
   function findRecursive(capacity, curIndex) {
-    count++
-
     // base case
     if (capacity <= 0 || curIndex >= weights.length) return 0
 

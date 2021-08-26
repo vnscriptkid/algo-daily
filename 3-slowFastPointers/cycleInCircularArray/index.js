@@ -1,6 +1,7 @@
 function isCircular(arr) {
   for (let i = 0; i < arr.length; i++) {
-    let slow = (fast = i)
+    let slow = i,
+      fast = i
     let isForward = arr[i] >= 0 // remember direction
 
     do {

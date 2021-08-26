@@ -22,7 +22,7 @@ function findCommonFreetime(schedule) {
 
   // init prev
   let prev = minHeap.peek()
-  cur = null
+  let cur = null
   // loop: as long as min heap is not empty
   while (minHeap.length) {
     // pop out 1 interval from heap

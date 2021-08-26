@@ -22,15 +22,4 @@ function findIntersections(list1, list2) {
   return intersections
 }
 
-const arr1 = [
-    [1, 3],
-    [5, 6],
-    [7, 9],
-  ],
-  arr2 = [
-    [2, 3],
-    [5, 7],
-  ]
-const result = findIntersections(arr1, arr2)
-
 module.exports = {findIntersections}

@@ -24,7 +24,4 @@ function evaluateExp(expression) {
   return result
 }
 
-const exp = "2*3-4-5"
-const result = evaluateExp(exp)
-
 module.exports = {evaluateExp}

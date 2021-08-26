@@ -30,11 +30,4 @@ function merge(intervals) {
   return result
 }
 
-const intervals = [
-  [6, 7],
-  [2, 4],
-  [5, 9],
-]
-const result = merge(intervals)
-
 module.exports = {merge}

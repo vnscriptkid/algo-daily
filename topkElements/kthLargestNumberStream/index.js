@@ -13,7 +13,7 @@ class Stream {
     }
   }
 
-  add = val => {
+  add(val) {
     this.minHeap.add(val)
 
     if (this.minHeap.length > this.k) {

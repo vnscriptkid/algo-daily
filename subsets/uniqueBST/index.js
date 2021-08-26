@@ -16,10 +16,10 @@ function _countUniqueBST(start, end) {
   for (let i = start; i <= end; i++) {
     // choose one as root node
     // build trees with left nodes
-    leftTrees = _countUniqueBST(start, i - 1)
+    let leftTrees = _countUniqueBST(start, i - 1)
 
     // build trees with right nodes
-    rightTrees = _countUniqueBST(i + 1, end)
+    let rightTrees = _countUniqueBST(i + 1, end)
 
     // combine root, left trees and right trees
     for (let leftRoot of leftTrees) {

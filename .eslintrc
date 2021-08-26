@@ -1,6 +1,6 @@
 {
     "parserOptions": {
-        "ecmaVersion": 2018
+        "ecmaVersion": "latest"
     },
     "extends": [
         "eslint:recommended",
@@ -8,7 +8,10 @@
     ],
     "env": {
         "node": true,
-        "jest": true
+        "jest": true,
+        "es6": true
     },
-    "rules": {}
+    "rules": {
+        "no-constant-condition": "off"
+    }
 }

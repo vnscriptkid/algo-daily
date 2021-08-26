@@ -5,7 +5,7 @@ class Node {
     this.val = val
     this.left = left
     this.right = right
-    this.next = null
+    this.next = next
   }
 }
 

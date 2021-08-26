@@ -21,7 +21,4 @@ function findPermutations(nums) {
   return cur
 }
 
-const nums = [1, 3, 5]
-let result = findPermutations(nums)
-
 module.exports = {findPermutations}

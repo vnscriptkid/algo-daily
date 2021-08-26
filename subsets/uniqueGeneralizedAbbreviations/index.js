@@ -34,7 +34,4 @@ function generateAbbreviations(word) {
   return result
 }
 
-const word = "BAT"
-const result = generateAbbreviations(word)
-
 module.exports = {generateAbbreviations}

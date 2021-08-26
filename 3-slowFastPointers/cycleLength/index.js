@@ -7,7 +7,8 @@ class Node {
 
 function cycleLength(head) {
   // find the meeting point between slow and fast
-  let slow = (fast = head)
+  let slow = head,
+    fast = head
 
   while (fast && fast.next) {
     slow = slow.next

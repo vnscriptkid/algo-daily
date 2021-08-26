@@ -24,7 +24,7 @@ function bst(arr, key, left, right) {
   return -1
 }
 
-function findMax(arr, key) {
+function findMax(arr) {
   let left = 0,
     right = arr.length - 1
   let middle

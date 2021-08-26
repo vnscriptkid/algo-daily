@@ -6,7 +6,8 @@ class Node {
 }
 
 function findMiddle(head) {
-  let slow = (fast = head)
+  let slow = head,
+    fast = head
 
   while (fast && fast.next) {
     slow = slow.next

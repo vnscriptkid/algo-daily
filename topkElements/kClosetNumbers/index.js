@@ -31,6 +31,7 @@ function findKClosetNums(nums, k, x) {
   }
 
   // extract k from heaps
+  // eslint-disable-next-line no-unused-vars
   for (let _ of Array(k)) {
     if (!minHeap.length) break
     result.push(minHeap.pop()[0])
