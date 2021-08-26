@@ -14,5 +14,19 @@
     "rules": {
         "no-constant-condition": "off",
         "strict": ["error", "never"] /* don't need strict as we have babel */
-    }
+    },
+    "overrides": [
+        {
+            "files": "**/*.+(ts|tsx)",
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "project": "./tsconfig.json"
+            },
+            "plugins": ["@typescript-eslint/eslint-plugin"],
+            "extends": [
+                "plugin:@typescript-eslint/eslint-recommended",
+                "plugin:@typescript-eslint/recommended"
+            ]        
+        }
+    ]
 }
