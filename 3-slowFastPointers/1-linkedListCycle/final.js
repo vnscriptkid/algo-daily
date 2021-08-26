@@ -4,21 +4,12 @@ class Node {
     this.next = next
   }
 }
-//           @
-//           $
-// 1 -> 2 -> 9 -> 7
-//      ^         |
-//      |_________|
-
-//      @
-//           $
-// 1 -> 2 -> 3 -> null
 
 function hasCycle(head) {
   let slow = head,
     fast = head
 
-  while (fast && fast.next && fast.next.next) {
+  while (fast.next && fast.next.next) {
     slow = slow.next
     fast = fast.next.next
 
