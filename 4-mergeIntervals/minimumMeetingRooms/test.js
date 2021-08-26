@@ -1,6 +1,6 @@
-const {findMinMeetingRooms} = require("./index")
+const {findMinMeetingRooms} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const meetings = [
     [1, 4],
     [2, 5],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual(2)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const meetings = [
     [6, 7],
     [2, 4],
@@ -20,7 +20,7 @@ test("it works 2", () => {
   expect(result).toEqual(1)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const meetings = [
     [1, 4],
     [2, 3],
@@ -30,7 +30,7 @@ test("it works 3", () => {
   expect(result).toEqual(2)
 })
 
-test("it works 4", () => {
+test('it works 4', () => {
   const meetings = [
     [4, 5],
     [2, 3],

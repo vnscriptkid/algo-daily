@@ -1,6 +1,6 @@
-const {findAllSchedulingOrders} = require("./index")
+const {findAllSchedulingOrders} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const Tasks = 3,
     Prerequisites = [
       [0, 1],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual([[0, 1, 2]])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const Tasks = 4,
     Prerequisites = [
       [3, 2],
@@ -25,7 +25,7 @@ test("it works 2", () => {
   ])
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const Tasks = 6,
     Prerequisites = [
       [2, 5],

@@ -1,7 +1,7 @@
-const {findPermutations} = require("./index")
-const {findPermutations: findPermutationsSolution} = require("./solution")
+const {findPermutations} = require('./index')
+const {findPermutations: findPermutationsSolution} = require('./solution')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const nums = [1, 3, 5]
   let result = findPermutations(nums)
   expect(result).toEqual([

@@ -1,8 +1,8 @@
-const {findBestCombination: bruteForce} = require("./bruteForce")
-const {findBestCombination: topDown} = require("./topDown")
-const {findBestCombination: bottomUp} = require("./bottomUp")
+const {findBestCombination: bruteForce} = require('./bruteForce')
+const {findBestCombination: topDown} = require('./topDown')
+const {findBestCombination: bottomUp} = require('./bottomUp')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const profits = [1, 6, 10, 16],
     weights = [1, 2, 3, 5],
     capacity = 7

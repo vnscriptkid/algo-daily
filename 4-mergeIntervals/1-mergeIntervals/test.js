@@ -1,6 +1,6 @@
-const {merge} = require("./index")
+const {merge} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const intervals = [
     [6, 7],
     [2, 4],
@@ -13,7 +13,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const intervals = [
     [1, 4],
     [2, 6],
@@ -23,7 +23,7 @@ test("it works 2", () => {
   expect(result).toEqual([[1, 6]])
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const intervals = [
     [1, 4],
     [2, 5],

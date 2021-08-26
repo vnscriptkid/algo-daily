@@ -1,6 +1,6 @@
-const {findNextIntervals} = require("./index")
+const {findNextIntervals} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const intervals = [
     [2, 3],
     [3, 4],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual([1, 2, -1])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const intervals = [
     [3, 4],
     [1, 5],

@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function maximizeDistinctNumbers(nums, k) {
   // build num-freq map

@@ -1,7 +1,7 @@
-const {reverseThenInvert} = require("./index")
-const {reverseThenInvert: solution} = require("./solution")
+const {reverseThenInvert} = require('./index')
+const {reverseThenInvert: solution} = require('./solution')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const matrix = [
     [1, 0, 1],
     [1, 1, 1],
@@ -29,7 +29,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const matrix = [
     [1, 1, 0, 0],
     [1, 0, 0, 1],

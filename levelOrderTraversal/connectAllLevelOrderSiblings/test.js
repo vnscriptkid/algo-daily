@@ -1,6 +1,6 @@
-const {connectAllLevelSiblings, Node} = require("./index")
+const {connectAllLevelSiblings, Node} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node9 = new Node(9)
   const node7 = new Node(7)

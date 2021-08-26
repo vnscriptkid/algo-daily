@@ -1,6 +1,6 @@
-const {findClosestPointsToOrigin} = require("./index")
+const {findClosestPointsToOrigin} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const points = [
       [1, 2],
       [1, 3],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual([[1, 2]])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const points = [
       [1, 3],
       [3, 4],

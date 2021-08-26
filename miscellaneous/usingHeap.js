@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function findkthSmallest(nums, k) {
   const maxHeap = new Heap([], null, (a, b) => a - b)

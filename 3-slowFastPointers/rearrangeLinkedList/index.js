@@ -6,12 +6,12 @@ class Node {
 
   print() {
     let cur = this
-    let output = ""
+    let output = ''
     while (cur) {
-      output += cur.val + "->"
+      output += cur.val + '->'
       cur = cur.next
     }
-    output += "NULL"
+    output += 'NULL'
     console.log(output)
   }
 }

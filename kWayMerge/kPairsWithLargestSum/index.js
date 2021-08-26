@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function findkPairs(l1, l2, k) {
   const minHeap = new Heap([], null, (a, b) => b[0] - a[0])

@@ -1,6 +1,6 @@
-const {findkPairs} = require("./index")
+const {findkPairs} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const L1 = [9, 8, 2],
     L2 = [6, 3, 1],
     K = 3
@@ -12,7 +12,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const L1 = [5, 2, 1],
     L2 = [2, -1],
     K = 3

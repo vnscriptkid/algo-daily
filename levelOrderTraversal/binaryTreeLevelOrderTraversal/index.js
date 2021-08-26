@@ -28,15 +28,15 @@ function traverse(root) {
   const result = []
   const queue = new Queue()
 
-  queue.enqueue("x")
+  queue.enqueue('x')
   queue.enqueue(root)
 
   while (!queue.empty()) {
     let node = queue.dequeue()
-    if (node === "x" && !queue.empty()) {
-      queue.enqueue("x")
+    if (node === 'x' && !queue.empty()) {
+      queue.enqueue('x')
       result.push([])
-    } else if (node === "x") break
+    } else if (node === 'x') break
     else {
       if (node.left) queue.enqueue(node.left)
       if (node.right) queue.enqueue(node.right)

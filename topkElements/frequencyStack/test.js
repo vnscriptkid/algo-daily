@@ -1,6 +1,6 @@
-const {Stack} = require("./index")
+const {Stack} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const stack = new Stack()
   stack.push(1)
   stack.push(2)

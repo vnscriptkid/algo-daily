@@ -1,6 +1,6 @@
-const {MedianOfStream} = require("./index")
+const {MedianOfStream} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const stream = new MedianOfStream()
   stream.insert(3)
   stream.insert(1)

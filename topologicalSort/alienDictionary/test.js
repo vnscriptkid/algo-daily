@@ -1,19 +1,19 @@
-const {findCorrectOrder} = require("./index")
+const {findCorrectOrder} = require('./index')
 
-test("it works 1", () => {
-  const words = ["ba", "bc", "ac", "cab"]
+test('it works 1', () => {
+  const words = ['ba', 'bc', 'ac', 'cab']
   const result = findCorrectOrder(words)
-  expect(result).toEqual("bac")
+  expect(result).toEqual('bac')
 })
 
-test("it works 2", () => {
-  const words = ["cab", "aaa", "aab"]
+test('it works 2', () => {
+  const words = ['cab', 'aaa', 'aab']
   const result = findCorrectOrder(words)
-  expect(result).toEqual("cab")
+  expect(result).toEqual('cab')
 })
 
-test("it works 2", () => {
-  const words = ["ywx", "wz", "xww", "xz", "zyy", "zwz"]
+test('it works 2', () => {
+  const words = ['ywx', 'wz', 'xww', 'xz', 'zyy', 'zwz']
   const result = findCorrectOrder(words)
-  expect(result).toEqual("ywxz")
+  expect(result).toEqual('ywxz')
 })

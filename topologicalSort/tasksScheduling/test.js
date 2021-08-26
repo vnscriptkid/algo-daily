@@ -1,6 +1,6 @@
-const {isSchedulingPossible} = require("./index")
+const {isSchedulingPossible} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const tasks = 3,
     prerequisites = [
       [0, 1],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const tasks = 3,
     prerequisites = [
       [0, 1],
@@ -21,7 +21,7 @@ test("it works 2", () => {
   expect(result).toEqual(false)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const tasks = 6,
     prerequisites = [
       [2, 5],

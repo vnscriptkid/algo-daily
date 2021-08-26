@@ -1,6 +1,6 @@
-const {findTrees} = require("./index")
+const {findTrees} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const vertices = 5,
     edges = [
       [0, 1],
@@ -12,7 +12,7 @@ test("it works 1", () => {
   expect(result).toEqual([1, 2])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const vertices = 4,
     edges = [
       [0, 1],
@@ -23,7 +23,7 @@ test("it works 2", () => {
   expect(result).toEqual([0, 2])
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const vertices = 4,
     edges = [
       [0, 1],

@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 function topoSort(vertices, edges) {
   // build graph using adjacency list

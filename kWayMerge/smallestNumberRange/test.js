@@ -1,6 +1,6 @@
-const {findSmallestRange} = require("./index")
+const {findSmallestRange} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const L1 = [1, 5, 8],
     L2 = [4, 12],
     L3 = [7, 8, 10]
@@ -8,7 +8,7 @@ test("it works 1", () => {
   expect(result).toEqual([4, 7])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const L1 = [1, 9],
     L2 = [4, 12],
     L3 = [7, 10, 16]

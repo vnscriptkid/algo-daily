@@ -1,7 +1,7 @@
 function checkDelete(str, curPointer) {
   let count = 0
 
-  while (curPointer >= 0 && str[curPointer] === "#") {
+  while (curPointer >= 0 && str[curPointer] === '#') {
     curPointer--
     count++
   }

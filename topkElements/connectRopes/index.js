@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function minimizeRopeCost(ropes) {
   let cost = 0

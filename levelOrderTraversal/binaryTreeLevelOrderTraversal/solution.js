@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 class Node {
   constructor(val, left = null, right = null) {

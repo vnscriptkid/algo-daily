@@ -1,6 +1,6 @@
-const {SlidingWindowMedian} = require("./index")
+const {SlidingWindowMedian} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const arr = [1, 2, -1, 3, 5],
     k = 3
   const slidingWindowMedian = new SlidingWindowMedian(arr, k)
@@ -8,7 +8,7 @@ test("it works 1", () => {
   expect(result).toEqual([1, 2, 3])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const arr = [1, 2, -1, 3, 5],
     k = 2
   const slidingWindowMedian = new SlidingWindowMedian(arr, k)

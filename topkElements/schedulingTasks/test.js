@@ -1,7 +1,7 @@
-const {scheduleTasks} = require("./index")
+const {scheduleTasks} = require('./index')
 
-test("it works 1", () => {
-  const tasks = ["a", "a", "a", "b", "c", "c"],
+test('it works 1', () => {
+  const tasks = ['a', 'a', 'a', 'b', 'c', 'c'],
     K = 2
   const result = scheduleTasks(tasks, K)
   expect(result).toEqual(7)

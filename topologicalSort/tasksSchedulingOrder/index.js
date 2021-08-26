@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 function findExecutionOrder(numOfTasks, prerequisites) {
   // build the graph, indegrees map

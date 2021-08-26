@@ -17,7 +17,7 @@ Explanation: Lets consider all windows of size ‘3’:
 [1, 2, -1, 3, 5] -> median is 2.0
 [1, 2, -1, 3, 5] -> median is 3.0
 */
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 class SlidingWindowMedian {
   constructor(arr, k) {

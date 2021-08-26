@@ -1,6 +1,6 @@
-const {findMaxCpuLoad} = require("./index")
+const {findMaxCpuLoad} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const jobs = [
     [1, 4, 3],
     [2, 5, 4],
@@ -10,7 +10,7 @@ test("it works 1", () => {
   expect(result).toEqual(7)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const jobs = [
     [6, 7, 10],
     [2, 4, 11],
@@ -20,7 +20,7 @@ test("it works 2", () => {
   expect(result).toEqual(15)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const jobs = [
     [1, 4, 2],
     [2, 4, 1],

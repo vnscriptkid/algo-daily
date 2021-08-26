@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function sortByFreq(str) {
   const maxHeap = new Heap([], null, (a, b) => a[1] - b[1])
@@ -16,10 +16,10 @@ function sortByFreq(str) {
   }
 
   // as long as heap is not empty
-  let output = ""
+  let output = ''
   while (maxHeap.length > 0) {
     const [char, count] = maxHeap.pop()
-    output += Array(count).fill(char).join("")
+    output += Array(count).fill(char).join('')
   }
 
   return output

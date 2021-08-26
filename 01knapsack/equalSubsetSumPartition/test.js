@@ -1,8 +1,8 @@
-const {canPartitionEqually: bruteForce} = require("./bruteForce")
-const {canPartitionEqually: topDown} = require("./topDown")
-const {canPartitionEqually: bottomUp} = require("./bottomUp")
+const {canPartitionEqually: bruteForce} = require('./bruteForce')
+const {canPartitionEqually: topDown} = require('./topDown')
+const {canPartitionEqually: bottomUp} = require('./bottomUp')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const set = [1, 2, 3, 4]
   let result = bruteForce(set)
   expect(result).toEqual(true)
@@ -12,7 +12,7 @@ test("it works 1", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const set = [1, 1, 3, 4, 7]
   let result = bruteForce(set)
   expect(result).toEqual(true)
@@ -22,7 +22,7 @@ test("it works 2", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const set = [2, 3, 4, 6]
   let result = bruteForce(set)
   expect(result).toEqual(false)

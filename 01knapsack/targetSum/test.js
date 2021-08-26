@@ -1,7 +1,7 @@
-const {countWaysToAddSymbols: bruteforce} = require("./bruteForce")
-const {countWaysToAddSymbols: bottomUp} = require("./bottomUp")
+const {countWaysToAddSymbols: bruteforce} = require('./bruteForce')
+const {countWaysToAddSymbols: bottomUp} = require('./bottomUp')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const nums = [1, 1, 2, 3],
     sum = 1
   let result = bruteforce(nums, sum)
@@ -11,7 +11,7 @@ test("it works 1", () => {
   expect(result).toEqual(3)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const nums = [1, 2, 7, 1],
     sum = 9
   let result = bruteforce(nums, sum)

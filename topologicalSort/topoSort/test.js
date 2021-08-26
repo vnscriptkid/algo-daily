@@ -1,6 +1,6 @@
-const {topoSort} = require("./index")
+const {topoSort} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const vertices = 5,
     edges = [
       [4, 2],
@@ -13,7 +13,7 @@ test("it works 1", () => {
   expect(result).toEqual([4, 2, 3, 0, 1])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const vertices = 7,
     edges = [
       [6, 4],

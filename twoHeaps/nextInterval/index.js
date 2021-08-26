@@ -16,7 +16,7 @@ Output: [2, -1, -1]
 Explanation: The next interval of [3,4] is [4,6] which has index ‘2’. There is no next interval for [1,5] and [4,6].
 */
 
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function findNextIntervals(intervals) {
   const result = Array(intervals.length).fill(-1)

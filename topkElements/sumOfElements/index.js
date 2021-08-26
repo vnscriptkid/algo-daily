@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function sumOf(nums, k1, k2) {
   let bigK = Math.max(k1, k2)

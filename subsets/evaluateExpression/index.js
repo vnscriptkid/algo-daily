@@ -5,9 +5,9 @@ function evaluateExp(expression) {
 
   const result = []
   // loop every character
-  for (let [index, char] of expression.split("").entries()) {
+  for (let [index, char] of expression.split('').entries()) {
     // if it's operators, calculate left and right
-    if ("+-*".includes(char)) {
+    if ('+-*'.includes(char)) {
       const leftResult = evaluateExp(expression.substring(0, index))
       const rightResult = evaluateExp(expression.substring(index + 1))
 

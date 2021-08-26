@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 function compareWords(word1, word2) {
   let i = 0
@@ -37,7 +37,7 @@ function findCorrectOrder(words) {
   }
 
   // find correct order
-  let result = ""
+  let result = ''
   while (sources.length) {
     const char = sources.shift()
 

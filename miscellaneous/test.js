@@ -1,9 +1,9 @@
-const {findkthSmallest: bruteforce} = require("./bruteforce")
-const {findkthSmallest: usingHeap} = require("./usingHeap")
-const {findkthSmallest: usingPartition} = require("./usingHeap")
-const {findkthSmallest: usingRandomPartition} = require("./usingHeap")
+const {findkthSmallest: bruteforce} = require('./bruteforce')
+const {findkthSmallest: usingHeap} = require('./usingHeap')
+const {findkthSmallest: usingPartition} = require('./usingHeap')
+const {findkthSmallest: usingRandomPartition} = require('./usingHeap')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const nums = [1, 5, 12, 2, 11, 5],
     k = 3
   let result = bruteforce(nums, k)
@@ -19,7 +19,7 @@ test("it works 1", () => {
   expect(result).toEqual(5)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const nums = [1, 5, 12, 2, 11, 5],
     k = 4
   let result = bruteforce(nums, k)
@@ -35,7 +35,7 @@ test("it works 2", () => {
   expect(result).toEqual(5)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const nums = [5, 12, 11, -1, 12],
     k = 3
   let result = bruteforce(nums, k)

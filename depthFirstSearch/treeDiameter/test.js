@@ -1,6 +1,6 @@
-const {findTreeDiameter, Node} = require("./index")
+const {findTreeDiameter, Node} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)
@@ -18,7 +18,7 @@ test("it works 1", () => {
   expect(result).toEqual(5)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)

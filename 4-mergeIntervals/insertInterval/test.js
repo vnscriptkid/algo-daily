@@ -1,6 +1,6 @@
-const {insert} = require("./index")
+const {insert} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const intervals = [
       [1, 3],
       [5, 7],
@@ -15,7 +15,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const intervals = [
       [1, 3],
       [5, 7],
@@ -29,7 +29,7 @@ test("it works 2", () => {
   ])
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const intervals = [
       [2, 3],
       [5, 7],

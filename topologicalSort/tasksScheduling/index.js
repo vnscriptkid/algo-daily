@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 function isSchedulingPossible(tasks, prerequisites) {
   // build graph, indegrees map

@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function findkLargest(arr, k) {
   const minHeap = new Heap([], null, (a, b) => b - a)

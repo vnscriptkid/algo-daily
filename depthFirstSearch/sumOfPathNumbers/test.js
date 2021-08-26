@@ -1,6 +1,6 @@
-const {sumPathNumbers, Node} = require("./index")
+const {sumPathNumbers, Node} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node7 = new Node(7)
   const node9 = new Node(9)

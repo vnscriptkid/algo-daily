@@ -1,6 +1,6 @@
-const {Stream} = require("./index")
+const {Stream} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const nums = [3, 1, 5, 12, 2, 11],
     k = 4
 

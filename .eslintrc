@@ -12,6 +12,7 @@
         "es6": true
     },
     "rules": {
-        "no-constant-condition": "off"
+        "no-constant-condition": "off",
+        "strict": ["error", "never"] /* don't need strict as we have babel */
     }
 }

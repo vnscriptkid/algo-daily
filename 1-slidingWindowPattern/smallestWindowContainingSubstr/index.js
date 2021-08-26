@@ -36,7 +36,7 @@ function findSmallestContainer(str, pattern) {
     }
   }
 
-  return ""
+  return ''
 }
 
 module.exports = {findSmallestContainer}

@@ -1,6 +1,6 @@
-const {getAveragesSubarray} = require("./index")
+const {getAveragesSubarray} = require('./index')
 
-test("it works", () => {
+test('it works', () => {
   const arr = [1, 3, 2, 6, -1, 4, 1, 8, 2],
     k = 5
   const result = getAveragesSubarray(arr, k)

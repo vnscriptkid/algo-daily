@@ -1,7 +1,7 @@
-const {findCommonFreetime} = require("./index")
-const {findCommonFreetime: findCommonFreetimeSolution} = require("./solution")
+const {findCommonFreetime} = require('./index')
+const {findCommonFreetime: findCommonFreetimeSolution} = require('./solution')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const workingHours = [
     [
       [1, 3],
@@ -19,7 +19,7 @@ test("it works 1", () => {
   expect(result).toEqual([[3, 5]])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const workingHours = [
     [
       [1, 3],
@@ -41,7 +41,7 @@ test("it works 2", () => {
   ])
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const workingHours = [
     [[1, 3]],
     [[2, 4]],

@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function rearrangeString(str) {
   // build char-freq map
@@ -17,7 +17,7 @@ function rearrangeString(str) {
   }
 
   let prevItem = null
-  let result = ""
+  let result = ''
 
   while (maxHeap.length) {
     const [char, count] = maxHeap.pop()
@@ -31,7 +31,7 @@ function rearrangeString(str) {
     prevItem = [char, count - 1]
   }
 
-  return result.length === str.length ? result : ""
+  return result.length === str.length ? result : ''
 }
 
 module.exports = {rearrangeString}

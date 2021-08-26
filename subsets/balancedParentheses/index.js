@@ -1,7 +1,7 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 class Paren {
-  constructor(content = "", opening = 0, closing = 0) {
+  constructor(content = '', opening = 0, closing = 0) {
     this.content = content
     this.opening = opening
     this.closing = closing
@@ -22,10 +22,10 @@ function generateBalancedParen(n) {
       continue
     }
 
-    if (opening < n) queue.push(new Paren(content + "(", opening + 1, closing))
+    if (opening < n) queue.push(new Paren(content + '(', opening + 1, closing))
 
     if (opening > closing)
-      queue.push(new Paren(content + ")", opening, closing + 1))
+      queue.push(new Paren(content + ')', opening, closing + 1))
   }
 
   return result

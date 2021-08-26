@@ -1,8 +1,8 @@
-const {findMinSubsetSumDiff: bruteforce} = require("./bruteForce")
-const {findMinSubsetSumDiff: topDown} = require("./topDown")
-const {findMinSubsetSumDiff: bottomUp} = require("./bottomUp")
+const {findMinSubsetSumDiff: bruteforce} = require('./bruteForce')
+const {findMinSubsetSumDiff: topDown} = require('./topDown')
+const {findMinSubsetSumDiff: bottomUp} = require('./bottomUp')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const set = [1, 2, 3, 9]
   let result = bruteforce(set)
   expect(result).toEqual(3)
@@ -12,7 +12,7 @@ test("it works 1", () => {
   expect(result).toEqual(3)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const set = [1, 2, 7, 1, 5]
   let result = bruteforce(set)
   expect(result).toEqual(0)
@@ -22,7 +22,7 @@ test("it works 2", () => {
   expect(result).toEqual(0)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const set = [1, 3, 100, 4]
   let result = bruteforce(set)
   expect(result).toEqual(92)

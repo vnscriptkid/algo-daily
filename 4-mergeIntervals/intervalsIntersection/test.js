@@ -1,6 +1,6 @@
-const {findIntersections} = require("./index")
+const {findIntersections} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const arr1 = [
       [1, 3],
       [5, 6],
@@ -18,7 +18,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const arr1 = [
       [1, 3],
       [5, 7],

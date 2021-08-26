@@ -1,6 +1,6 @@
-const {Node, rearrange} = require("./index")
+const {Node, rearrange} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node2 = new Node(2)
   const node4 = new Node(4)
   const node6 = new Node(6)
@@ -24,7 +24,7 @@ test("it works 1", () => {
   expect(node8.next).toEqual(null)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const node2 = new Node(2)
   const node4 = new Node(4)
   const node6 = new Node(6)

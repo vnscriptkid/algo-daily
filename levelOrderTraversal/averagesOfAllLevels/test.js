@@ -1,6 +1,6 @@
-const {Node, levelAverages} = require("./index")
+const {Node, levelAverages} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)

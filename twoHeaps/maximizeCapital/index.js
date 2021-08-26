@@ -21,7 +21,7 @@ Next, we will select the fourth project, giving us a profit of 5.
 After selecting the three projects, our total capital will be 8 (1+2+5).
 */
 
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 class Project {
   constructor(capital, profit) {

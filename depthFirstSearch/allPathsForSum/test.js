@@ -1,6 +1,6 @@
-const {findAllPathsSum, Node} = require("./index")
+const {findAllPathsSum, Node} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node7 = new Node(7)
   const node9 = new Node(9)
@@ -24,7 +24,7 @@ test("it works 1", () => {
   ])
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const node1 = new Node(1)
   const node5 = new Node(5)
   const node7 = new Node(7)

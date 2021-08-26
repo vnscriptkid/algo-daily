@@ -1,6 +1,6 @@
-const {Node, findLevelOrderSuccessor} = require("./index")
+const {Node, findLevelOrderSuccessor} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)
@@ -18,7 +18,7 @@ test("it works 1", () => {
   expect(result).toEqual(4)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const node1 = new Node(1)
   const node9 = new Node(9)
   const node7 = new Node(7)
@@ -36,7 +36,7 @@ test("it works 2", () => {
   expect(result).toEqual(10)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const node1 = new Node(1)
   const node9 = new Node(9)
   const node7 = new Node(7)

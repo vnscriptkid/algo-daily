@@ -1,5 +1,5 @@
-const Heap = require("collections/heap")
-const Queue = require("collections/deque")
+const Heap = require('collections/heap')
+const Queue = require('collections/deque')
 
 function rearrangeString(str, k) {
   // build char-freq map
@@ -17,7 +17,7 @@ function rearrangeString(str, k) {
   }
 
   const queue = new Queue()
-  let result = ""
+  let result = ''
 
   while (heap.length) {
     const [char, count] = heap.pop()
@@ -33,7 +33,7 @@ function rearrangeString(str, k) {
     }
   }
 
-  return result.length === str.length ? result : ""
+  return result.length === str.length ? result : ''
 }
 
 module.exports = {rearrangeString}

@@ -1,6 +1,6 @@
-const {isPalindromic, Node} = require("./index")
+const {isPalindromic, Node} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)
@@ -16,7 +16,7 @@ test("it works 1", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)
@@ -34,7 +34,7 @@ test("it works 2", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)
@@ -50,7 +50,7 @@ test("it works 3", () => {
   expect(result).toEqual(false)
 })
 
-test("it works 4", () => {
+test('it works 4', () => {
   const node1 = new Node(1)
   const node2 = new Node(2)
   const node3 = new Node(3)

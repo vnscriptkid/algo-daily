@@ -1,6 +1,6 @@
-const {canReconstruct} = require("./index")
+const {canReconstruct} = require('./index')
 
-test("it works 1", () => {
+test('it works 1', () => {
   const originalSeq = [1, 2, 3, 4],
     seqs = [
       [1, 2],
@@ -11,7 +11,7 @@ test("it works 1", () => {
   expect(result).toEqual(true)
 })
 
-test("it works 2", () => {
+test('it works 2', () => {
   const originalSeq = [1, 2, 3, 4],
     seqs = [
       [1, 2],
@@ -22,7 +22,7 @@ test("it works 2", () => {
   expect(result).toEqual(false)
 })
 
-test("it works 3", () => {
+test('it works 3', () => {
   const originalSeq = [3, 1, 4, 2, 5],
     seqs = [
       [3, 1, 5],

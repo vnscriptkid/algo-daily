@@ -1,4 +1,4 @@
-const Queue = require("collections/deque")
+const Queue = require('collections/deque')
 
 function findTrees(numOfNodes, edges) {
   // build the graph, indegrees

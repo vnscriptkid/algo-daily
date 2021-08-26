@@ -1,4 +1,4 @@
-const Heap = require("collections/heap")
+const Heap = require('collections/heap')
 
 function findKthSmallest(lists, k) {
   const minHeap = new Heap([], null, (a, b) => b[0] - a[0])
