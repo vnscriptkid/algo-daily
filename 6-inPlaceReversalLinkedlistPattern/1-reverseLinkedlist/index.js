@@ -1,3 +1,11 @@
+// Reverse Linkedlist (in-place)
+// null<- 1 <-2 <- 3 <- 4    null
+//                            ^$
+
+// prev = 3
+
+// null <- 1 <- 2 <- 3 <- 4
+
 class Node {
   constructor(val, next = null) {
     this.val = val
@@ -6,18 +14,17 @@ class Node {
 }
 
 function reverse(head) {
-  let cur = head
   let prev = null
 
-  while (cur) {
-    let temp = cur.next
-    cur.next = prev
-    // loop
-    prev = cur
-    cur = temp
-  }
+  let cur = head
 
-  return prev
+  while (cur) {
+    let curNext = cur.next
+    cur.next = prev
+    // move to next node
+    prev = cur
+    cur = curNext
+  }
 }
 
 module.exports = {reverse, Node}
