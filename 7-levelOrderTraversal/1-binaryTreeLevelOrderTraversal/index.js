@@ -1,3 +1,18 @@
+// Given a binary tree, populate an array to represent its level-by-level traversal.
+// You should populate the values of all nodes of each level from left to right in separate sub-arrays.
+
+//     1
+//    / \
+//   2   3
+//  / \ / \
+// 4  5 6  7
+
+// [[1], [2, 3], [4, 5, 6, 7]]
+
+// queue: ->|  |->
+// out: 7
+// result [[1], [2, 3], [4, 5, 6, 7]]
+
 class Node {
   constructor(val, left = null, right = null) {
     this.val = val
@@ -6,41 +21,19 @@ class Node {
   }
 }
 
-class Queue {
-  constructor() {
-    this.data = []
-  }
-
-  enqueue(val) {
-    this.data.push(val)
-  }
-
-  dequeue() {
-    return this.data.shift()
-  }
-
-  empty() {
-    return this.data.length === 0
-  }
-}
-
 function traverse(root) {
+  const queue = [root] // push (enqueue), shift (dequeue)
   const result = []
-  const queue = new Queue()
 
-  queue.enqueue('x')
-  queue.enqueue(root)
-
-  while (!queue.empty()) {
-    let node = queue.dequeue()
-    if (node === 'x' && !queue.empty()) {
-      queue.enqueue('x')
-      result.push([])
-    } else if (node === 'x') break
-    else {
-      if (node.left) queue.enqueue(node.left)
-      if (node.right) queue.enqueue(node.right)
+  while (queue.length) {
+    let levelSize = queue.length
+    result.push([])
+    for (let i = 0; i < levelSize; i++) {
+      let node = queue.shift()
       result[result.length - 1].push(node.val)
+
+      if (node.left) queue.push(node.left)
+      if (node.right) queue.push(node.right)
     }
   }
 
