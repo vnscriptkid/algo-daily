@@ -1,45 +1,50 @@
-const Queue = require('collections/deque')
+// Topological Sort of a directed graph (a graph with unidirectional edges)
+// is a linear ordering of its vertices such that for every directed edge (U, V) from vertex U to vertex V,
+// U comes before V in the ordering.
+
+// Given a directed graph, find the topological ordering of its vertices.
 
 function topoSort(vertices, edges) {
   // build graph using adjacency list
-  // traverse graph, build indegree map that counts # of incomming vertices of each vertex
-  const graph = new Map()
-  const inDegrees = new Map()
-
-  for (let vertex of Array(vertices).keys()) {
-    graph.set(vertex, [])
-    inDegrees.set(vertex, 0)
+  // build a map { vertex: numOfIncomming }
+  const graph = new Map() //
+  const incommings = new Map()
+  // { 0: [], 1: [] }
+  for (let i = 0; i < vertices; i++) {
+    graph.set(i, [])
+    incommings.set(i, 0)
   }
 
   for (let [from, to] of edges) {
     graph.get(from).push(to)
-
-    inDegrees.set(to, inDegrees.get(to) + 1)
+    incommings.set(to, incommings.get(to) + 1)
   }
 
-  // push all vertices with no incomming vertex to sources
-  const sources = new Queue()
-  for (let [vertex, indeg] of inDegrees.entries()) {
-    if (indeg === 0) sources.push(vertex)
+  // build queue keeping vertices with no incomming
+  const queue = [] // shift: dequeue, push: enqueue
+  for (let [vertex, totalIncommings] of incommings.entries()) {
+    if (totalIncommings === 0) queue.push(vertex)
   }
 
-  const sortedList = []
+  // result
+  const result = []
 
-  // as long as there's still something in sources
-  while (sources.length) {
-    const curVertex = sources.shift()
-
-    sortedList.push(curVertex)
-
-    for (let neighbor of graph.get(curVertex)) {
-      inDegrees.set(neighbor, inDegrees.get(neighbor) - 1)
-
-      if (inDegrees.get(neighbor) === 0) sources.push(neighbor)
+  // loop as long as there's somethign in queue
+  while (queue.length) {
+    // pop out
+    const nextVertex = queue.shift()
+    // push in result
+    result.push(nextVertex)
+    // update incomming map
+    for (let child of graph.get(nextVertex)) {
+      incommings.set(child, incommings.get(child) - 1)
+      // if incomming === 0 => push in queue
+      if (incommings.get(child) === 0) queue.push(child)
     }
   }
+  // return result
 
-  // return sorted list
-  return sortedList
+  return result
 }
 
 module.exports = {topoSort}
