@@ -1,6 +1,7 @@
 const {findBestCombination: bruteForce} = require('./bruteForce')
 const {findBestCombination: topDown} = require('./topDown')
 const {findBestCombination: bottomUp} = require('./bottomUp')
+const {findMaxProfitBF} = require('./index')
 
 test('it works 1', () => {
   const profits = [1, 6, 10, 16],
@@ -11,5 +12,7 @@ test('it works 1', () => {
   result = topDown(profits, weights, capacity)
   expect(result).toEqual(22)
   result = bottomUp(profits, weights, capacity)
+  expect(result).toEqual(22)
+  result = findMaxProfitBF(profits, weights, capacity)
   expect(result).toEqual(22)
 })
