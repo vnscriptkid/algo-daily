@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build": "babel . --extensions .js,.ts --out-dir dist",
-    "check-types": "tsc",
     "test": "jest",
-    "lint": "eslint . --fix --ext .js,.ts",
+    "lint": "eslint . --fix --ext .js,.jsx",
     "prettier": "prettier \"**/*.+(js|json|ts)\"",
     "check-format": "npm run prettier -- --list-different",
-    "validate": "npm-run-all --parallel check-types lint check-format",
+    "validate": "npm-run-all --parallel lint check-format",
     "format": "npm run prettier -- --write",
     "prepare": "husky install",
     "lint-staged": "lint-staged"

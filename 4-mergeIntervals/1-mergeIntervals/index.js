@@ -1,4 +1,5 @@
-// Problem: Given a list of intervals, merge all the overlapping intervals to produce a list that has only mutually exclusive intervals.
+// Problem: Given a list of intervals, merge all the overlapping intervals to
+// produce a list that has only mutually exclusive intervals.
 // 0 1 2 3 4 5 6 7 8 9 10
 //   [     ]
 //       [     ]
@@ -23,7 +24,6 @@ function merge(intervals) {
       result.push(prev)
       prev = cur
     } else {
-      // [  { ]
       // [  { }]
       // [  { ] }
       prev[1] = Math.max(prev[1], cur[1])
