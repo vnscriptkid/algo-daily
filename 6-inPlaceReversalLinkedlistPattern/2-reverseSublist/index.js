@@ -1,3 +1,5 @@
+// Given the head of a LinkedList and two positions ‘p’ and ‘q’, reverse the LinkedList from position ‘p’ to ‘q’.
+
 class Node {
   constructor(val, next = null) {
     this.val = val
@@ -6,41 +8,41 @@ class Node {
 }
 //     null
 //      ^
-// 1 -> 2 <- 3 <- 4    5  -> null, p=2, q=4
-//                ^    $
-// prev = 3
-// i = 4
+// 1 -> 2    3 -> 4 -> 5 -> null, p=2, q=4
+//      p         q
+//           ^$
+//      2 <- 3 <- 4
+// 1 -> 4 -> 3 -> 2 -> 5 -> null
 
 function reverse(head, p, q) {
-  let i = 1
+  // find the node at p
+  let curIndex = 1
   let cur = head
-
-  // go to right before sublist
   let prev = null
-  while (i < p) {
+
+  while (curIndex < p) {
     prev = cur
     cur = cur.next
-    i++
+    curIndex++
   }
 
-  let rightBeforeSublist = prev
-
-  // reverse from next node
-
+  let nodeBeforeSublist = prev
+  let oldHeadOfSublist = cur
+  // curIndex === p
+  // Start reversing from here (p) to q
   prev = null
-  let nextOfCur = null
-  while (i <= q) {
-    nextOfCur = cur.next
+  while (curIndex <= q) {
+    let nextNode = cur.next
     cur.next = prev
+    //
     prev = cur
-    // loop
-    cur = nextOfCur
-    i++
+    cur = nextNode
+    curIndex++
   }
 
-  let newEndOfSublist = rightBeforeSublist.next
-  rightBeforeSublist.next = prev
-  newEndOfSublist.next = cur
+  // our sublist is reversed now, we are at q + 1 (cur)
+  nodeBeforeSublist.next = prev
+  oldHeadOfSublist.next = cur
 
   return head
 }
