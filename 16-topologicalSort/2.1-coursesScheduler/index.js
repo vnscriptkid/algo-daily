@@ -1,3 +1,5 @@
+// Course Schedule: There are ‘N’ courses, labeled from ‘0’ to ‘N-1’. Each course can have some prerequisite courses which need to be completed before it can be taken. Given the number of courses and a list of prerequisite pairs, find if it is possible for a student to take all the courses.
+
 // There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
 // You are given an array prerequisites where prerequisites[i] = [ai, bi]
 // indicates that you must take course bi first if you want to take course ai.
@@ -15,12 +17,12 @@
 // To take course 1 you should have finished course 0, and to take course 0 you should also have finished course 1. So it is impossible.
 
 function canFinish(numCourses, prerequisites) {
-  // build graph using adjacency list
-  // build incommings map: { course: numOfDeps }
   const graph = new Map()
   const incommings = new Map()
-
+  // build graph of courses using adjacency list using Map { course1: [ course2, course3 ] }
+  // build incommings using Map { course: #ofDeps }
   for (let course of Array(numCourses).keys()) {
+    // course: 0 -> numCourses - 1
     graph.set(course, [])
     incommings.set(course, 0)
   }
@@ -30,30 +32,31 @@ function canFinish(numCourses, prerequisites) {
     incommings.set(dest, incommings.get(dest) + 1)
   }
 
-  // init sources queue, storing course which has no deps
+  // initialize sources queue keeping all courses that have no deps
+  // init orderings
   const sources = []
-  const ordering = []
+  const orderings = []
 
   for (let [course, numOfDeps] of incommings.entries()) {
     if (numOfDeps === 0) sources.push(course)
   }
 
-  // loop as long as queue is not empty
-  while (sources.length > 0) {
-    // take one course out
+  // loop as long as sources is not empty
+  while (sources.length) {
+    // take one course out of sources queue
     const courseOut = sources.shift()
-    // put in the ordering
-    ordering.push(courseOut)
-    // update courses that depends on the course out
+    // add to orderings
+    orderings.push(courseOut)
+    // update incommings map at courses that the courseOut is pointing to
     for (let dest of graph.get(courseOut)) {
       incommings.set(dest, incommings.get(dest) - 1)
-
-      // if deps reach 0, add to queue
+      // if it reaches 0, put in the queue
       if (incommings.get(dest) === 0) sources.push(dest)
     }
   }
 
-  return ordering.length === numCourses
+  // return
+  return orderings.length === numCourses
 }
 
 module.exports = {canFinish}

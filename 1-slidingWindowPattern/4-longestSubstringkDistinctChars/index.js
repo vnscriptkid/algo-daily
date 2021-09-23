@@ -1,11 +1,18 @@
+// Longest Substring with K Distinct Characters
 // Given a string, find the length of the longest substring in it with no more than K distinct characters.
 
-// "c b b e b i", K=3
-//    $
-//              ^
+// Input: String="cbbebi", K=3
+// Output: 5
+// Explanation: The longest substrings with no more than '3' distinct characters are "cbbeb" & "bbebi".
 
-// {b: 3, e: 1, i: 1} => diffChars: 3
-// longest: 5
+//    c b b e b i
+//      $
+//                ^
+
+// charMap: { b: 3, e: 1, i: 1 }
+
+// curDistinctChars: 3
+// longestSize: 5
 
 class CharMap {
   constructor() {
@@ -13,9 +20,7 @@ class CharMap {
   }
 
   add(char) {
-    if (!(char in this.freq)) {
-      this.freq[char] = 0
-    }
+    if (!(char in this.freq)) this.freq[char] = 0
     this.freq[char] += 1
   }
 
@@ -27,31 +32,30 @@ class CharMap {
     if (this.freq[char] === 0) delete this.freq[char]
   }
 
-  diffChars() {
+  getDistinctChars() {
     return Object.keys(this.freq).length
   }
 }
 
 function findLongestSubstr(str, k) {
-  const charMap = new CharMap()
-
   let windowStart = 0
-  let longestWindow = 0
+  const charMap = new CharMap()
+  let longest = 0
 
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
     charMap.add(str.charAt(windowEnd))
 
-    while (charMap.diffChars() > k) {
+    while (charMap.getDistinctChars() > k) {
       charMap.remove(str.charAt(windowStart))
       windowStart++
     }
 
-    // diffChars is now <= k
     let windowSize = windowEnd - windowStart + 1
-    longestWindow = Math.max(longestWindow, windowSize)
+
+    longest = Math.max(longest, windowSize)
   }
 
-  return longestWindow
+  return longest
 }
 
 module.exports = {findLongestSubstr}
