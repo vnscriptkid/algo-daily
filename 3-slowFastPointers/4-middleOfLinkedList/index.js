@@ -6,8 +6,8 @@
 // Output: 3
 
 // Input: 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null
-//                       $
-//                                       ^
+//                       ^
+//                                        $
 // Output: 4
 
 class Node {
