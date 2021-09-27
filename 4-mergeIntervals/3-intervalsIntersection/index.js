@@ -7,9 +7,9 @@
 
 // 1 2 3 4 5 6 7 8 9
 // [   ]   [ ] [   ]
-//   ^
+//               ^
 //   [ ]   [   ]
-//    ^
+//           ^
 
 // Input: arr1=[[1, 3], [5, 7], [9, 12]], arr2=[[5, 10]]
 // Output: [5, 7], [9, 10]
@@ -20,22 +20,27 @@
 // [ [9,10] ]
 
 function isOverlapping(interval1, interval2) {
-  const isNot = interval1[0] > interval2[1] || interval2[0] > interval1[1]
-
-  if (isNot) return null
-
-  // [  ]
-  //   [  ]
-
-  //    [  ]
-  //  [   ]
-
+  // overlapping:
   // [   ]
+  //   [   ]
+
+  //   [   ]
+  // [   ]
+
+  // [     ]
+  //   [ ]
+
   //  [ ]
-  return [
-    Math.max(interval1[0], interval2[0]),
-    Math.min(interval1[1], interval2[1]),
-  ]
+  // [    ]
+
+  // not overlap
+  // [  ]
+  //      [  ]
+
+  //      [  ]
+  // [  ]
+  if (interval1[0] > interval2[1] || interval2[0] > interval1[1]) return false
+  return true
 }
 
 Array.prototype.endsBefore = function (other) {
@@ -45,16 +50,19 @@ Array.prototype.endsBefore = function (other) {
 function findIntersections(list1, list2) {
   let cur1 = 0,
     cur2 = 0
-
   const output = []
 
   while (cur1 < list1.length && cur2 < list2.length) {
-    let interval1 = list1[cur1]
-    let interval2 = list2[cur2]
+    const interval1 = list1[cur1]
+    const interval2 = list2[cur2]
 
-    const intersection = isOverlapping(interval1, interval2)
+    if (isOverlapping(interval1, interval2)) {
+      // find the intersection, save to output
+      const intersection = [
+        Math.max(interval1[0], interval2[0]),
+        Math.min(interval1[1], interval2[1]),
+      ]
 
-    if (intersection) {
       output.push(intersection)
     }
 
