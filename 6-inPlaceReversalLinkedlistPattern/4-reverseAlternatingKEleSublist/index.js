@@ -5,15 +5,12 @@
 // If, in the end, you are left with a sub-list with less than ‘k’ elements, reverse it too.
 
 // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> null, k = 2
-// [----]   [     ]   [-----]   [     ]
-// [==============]   [===============]
-//      ^
-// n <- 1 <- 2   3 -> 4 -> 5 -> 6 -> 7 -> 8 -> n
-//           p   c
+// [    ]              [    ]
+// 2 -> 1 -> 3 -> 4 -> 6 -> 5 -> 7 -> 8 -> null
 
-// endOfPrevSublist
-// headOfCurSublist
-// endOfCurSublist
+// newTailOfPrevSublist
+
+// 2 -> 1 -> 3 -> 4 -> 6 -> 5 -> 7 -> 8 -> null
 
 class Node {
   constructor(val, next = null) {
@@ -23,44 +20,42 @@ class Node {
 }
 
 function reverse(root, k) {
-  let prev = null,
-    cur = root
-
-  let endOfCurSublist = null,
-    endOfPrevSublist = null
+  let cur = root,
+    prev = null
+  let tailOfPrevSublist = null
 
   while (cur) {
+    // process k * 2 nodes
+
+    // process sublist to reverse
+    let tailOfCurSublist = cur
     let i = k
-    endOfCurSublist = cur
-    // 1 -> 2
-    // ^
-    while (cur && i > 0) {
+    while (i > 0 && cur) {
+      // reversing logic
       let curNext = cur.next
       cur.next = prev
       prev = cur
       cur = curNext
       i--
     }
-    // 1 <- 2   3
-    //      p   c
 
-    // connect with prev sublist
-    if (!endOfPrevSublist) root = prev
-    else endOfPrevSublist.next = prev
-    // connect with cur sublist
-    endOfCurSublist.next = cur
+    // connect prev sublist with cur sublist
+    if (!tailOfPrevSublist) root = prev
+    else tailOfPrevSublist.next = prev
 
+    // connect cur sublist with next sublist
+    tailOfCurSublist.next = cur
+
+    // skip next sublist of size k
     i = k
-    // 2    3 -> 4
-    // p    c
-    while (cur && i > 0) {
+    while (i > 0 && cur) {
+      // move forward
       prev = cur
       cur = cur.next
       i--
     }
-    endOfPrevSublist = prev
-    // 3 -> 4 -> 5
-    //      p    c
+
+    tailOfPrevSublist = prev
   }
 
   return root
