@@ -1,3 +1,14 @@
+// Level Averages in a Binary Tree
+// Given a binary tree, populate an array to represent the averages of all of its levels.
+
+//     1
+//    / \
+//   2   3
+//  /\   /\
+// 4  5  6 7
+
+// [1, 2.5, 5.5]
+
 class Node {
   constructor(val, left = null, right = null) {
     this.val = val
@@ -16,6 +27,7 @@ function levelAverages(root) {
     let sum = 0
 
     let i = 0
+
     while (i < levelSize) {
       const nodeOut = queue.shift()
 
