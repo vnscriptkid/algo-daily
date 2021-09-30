@@ -14,8 +14,29 @@ class Node {
   }
 }
 
-function findMaxSumPath(root) {
-  return root
+function sum(arr = []) {
+  return arr.reduce((a, b) => a + b, 0)
+}
+
+function findMaxSumPath(root, curPath = [], maxPath = {}) {
+  if (!root) return
+
+  curPath.push(root.val)
+
+  // left node
+  if (!root.left && !root.right) {
+    if (sum(curPath) > sum(maxPath.current)) maxPath.current = [...curPath]
+    return
+  }
+
+  for (let child of [root.left, root.right]) {
+    if (child) {
+      findMaxSumPath(child, curPath, maxPath)
+      curPath.pop()
+    }
+  }
+
+  return maxPath.current
 }
 
 module.exports = {findMaxSumPath, Node}
