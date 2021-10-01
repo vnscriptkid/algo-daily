@@ -6,6 +6,9 @@
 //    /\   /\
 //    4 5  2 7
 
+// 12, 13, 12, 17
+// [1, 9, 7]
+
 class Node {
   constructor(val, left = null, right = null) {
     this.val = val
@@ -14,29 +17,27 @@ class Node {
   }
 }
 
-function sum(arr = []) {
-  return arr.reduce((a, b) => a + b, 0)
-}
+const sum = (arr = []) => arr.reduce((a, num) => a + num, 0)
 
-function findMaxSumPath(root, curPath = [], maxPath = {}) {
+function findMaxSumPath(root, curPath = [], bestPath = {}) {
   if (!root) return
 
   curPath.push(root.val)
 
-  // left node
   if (!root.left && !root.right) {
-    if (sum(curPath) > sum(maxPath.current)) maxPath.current = [...curPath]
+    // leaf node now
+    if (sum(curPath) > sum(bestPath.current)) bestPath.current = [...curPath]
     return
   }
 
   for (let child of [root.left, root.right]) {
     if (child) {
-      findMaxSumPath(child, curPath, maxPath)
+      findMaxSumPath(child, curPath, bestPath)
       curPath.pop()
     }
   }
 
-  return maxPath.current
+  return bestPath.current
 }
 
 module.exports = {findMaxSumPath, Node}
