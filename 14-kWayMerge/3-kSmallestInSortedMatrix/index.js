@@ -1,6 +1,19 @@
 // Kth Smallest Number in a Sorted Matrix (Hard)
-// Given an N * NN∗N matrix where each row and column is sorted in ascending order,
+// Given an N * N matrix where each row and column is sorted in ascending order,
 // find the Kth smallest element in the matrix.
+
+// Input: Matrix=[
+//     [2, 6, 8],
+//     [3, 7, 10],
+//     [5, 8, 11]
+//   ],
+
+// minHeap: (7,) 8, 8
+
+// 2, 3, 5, 6, 7
+
+// K=5
+// Output: 7
 
 class Node {
   constructor(val, rowIndex, numIndex) {
@@ -9,12 +22,6 @@ class Node {
     this.numIndex = numIndex
   }
 }
-
-// Input: Matrix=[
-//     [2, 6, 8],
-//     [3, 7, 10],
-//     [5, 8, 11]
-//   ],
 
 const Heap = require('collections/heap')
 
@@ -26,20 +33,19 @@ function findKsmallest(matrix, k) {
   }
 
   let i = 0
-  let nodeOut
-  while (i < k || !minHeap.length) {
-    nodeOut = minHeap.pop()
+  while (minHeap.length) {
+    const nodeOut = minHeap.pop()
+    if (++i === k) return nodeOut.val
 
     const {rowIndex, numIndex} = nodeOut
 
-    const curRow = matrix[rowIndex]
-    if (numIndex + 1 < curRow.length) {
-      minHeap.add(new Node(curRow[numIndex + 1], rowIndex, numIndex + 1))
+    const row = matrix[rowIndex]
+    if (numIndex + 1 < row.length) {
+      minHeap.add(new Node(row[numIndex + 1], rowIndex, numIndex + 1))
     }
-    i++
   }
 
-  return nodeOut.val
+  return null
 }
 
 module.exports = {findKsmallest}
