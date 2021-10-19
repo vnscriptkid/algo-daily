@@ -1,6 +1,9 @@
 // Palindrome LinkedList
 // Given the head of a Singly LinkedList, write a method to check if the LinkedList is a palindrome or not.
 
+// a b c b a
+// a b c c b a
+
 class Node {
   constructor(val, next = null) {
     this.val = val
@@ -8,11 +11,15 @@ class Node {
   }
 }
 
+// a b b a
+
 // 1 -> 2 -> 3 -> 2 -> 1 -> null
-// 1 -> 2 -> 3 <- 2 <- 1
 
 // 1 -> 2 -> 3 -> 3 -> 2 -> 1 -> null
-// 1 -> 2 -> 3 <- 3 <- 2 <- 1
+
+//          null
+//           ^
+// 1 -> 2 -> 3 -> 3 -> 2 -> 1 -> null
 
 function findMiddle(head) {
   let slow = head,
@@ -27,26 +34,27 @@ function findMiddle(head) {
 }
 
 function reverse(head) {
-  let prev = null
-  let cur = head
+  let prev = null,
+    cur = head
+
   while (cur) {
-    let curNext = cur.next
+    let nextNode = cur.next
     cur.next = prev
-    // before next round
+    // update cur & prev
     prev = cur
-    cur = curNext
+    cur = nextNode
   }
   return prev
 }
 
 function isPalindromic(head) {
-  // find middle
-  let middle = findMiddle(head)
-  // reverse from middle
-  let lastNode = reverse(middle)
-  // check if it's palindromic
+  // find the middle node
+  const middle = findMiddle(head)
+  // reverse second half of LL (from middle node)
+  const tail = reverse(middle)
+  // check palindromicity by iterating from 2 ends
   let left = head,
-    right = lastNode
+    right = tail
   let result = true
   while (right !== middle) {
     if (left.val !== right.val) {
@@ -56,10 +64,9 @@ function isPalindromic(head) {
     left = left.next
     right = right.next
   }
-  // re-reverse
-  reverse(lastNode)
-
-  // return
+  // re-reverse second half of LL
+  reverse(tail)
+  // return result
   return result
 }
 
