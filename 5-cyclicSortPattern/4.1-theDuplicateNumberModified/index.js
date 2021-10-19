@@ -16,6 +16,7 @@
 // Output: 4
 
 function findDuplicateNumber(nums) {
+  // TODO
   console.log(nums)
   return 0
 }
