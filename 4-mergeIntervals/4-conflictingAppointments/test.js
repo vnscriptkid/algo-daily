@@ -1,4 +1,4 @@
-const {hasNoConflict} = require('./index')
+const {canAttendAllAppointments} = require('./index')
 
 test('it works 1', () => {
   const arr = [
@@ -6,7 +6,7 @@ test('it works 1', () => {
     [2, 4],
     [8, 12],
   ]
-  const result = hasNoConflict(arr)
+  const result = canAttendAllAppointments(arr)
   expect(result).toEqual(true)
 })
 
@@ -16,7 +16,7 @@ test('it works 2', () => {
     [2, 3],
     [3, 6],
   ]
-  const result = hasNoConflict(arr)
+  const result = canAttendAllAppointments(arr)
   expect(result).toEqual(false)
 })
 
@@ -26,6 +26,6 @@ test('it works 3', () => {
     [2, 5],
     [7, 9],
   ]
-  const result = hasNoConflict(arr)
+  const result = canAttendAllAppointments(arr)
   expect(result).toEqual(false)
 })

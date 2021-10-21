@@ -5,20 +5,22 @@
 // Output: false
 // Explanation: Since [1,4] and [2,5] overlap, a person cannot attend both of these appointments.
 
-function hasNoConflict(intervals) {
-  // sort intervals by startTime
+function canAttendAllAppointments(intervals) {
+  // sort by start time
   intervals.sort((a, b) => a[0] - b[0])
 
-  // iterate through intervals, compare cur with prev
-  let prev = intervals[0]
-  let cur = null
+  // iterate through sorted intervals list, compare cur interval with prev interval
   for (let i = 1; i < intervals.length; i++) {
-    cur = intervals[i]
+    // if overlap is found, return false
+    let cur = intervals[i]
+    let prev = intervals[i - 1]
+
+    // [ { ]   }
     if (cur[0] <= prev[1]) return false
   }
 
-  // return true after exiting the loop
+  // exit loop return true
   return true
 }
 
-module.exports = {hasNoConflict}
+module.exports = {canAttendAllAppointments}
