@@ -1,6 +1,18 @@
 // Rotate a LinkedList (medium) #
 // Given the head of a Singly LinkedList and a number ‘k’, rotate the LinkedList to the right by ‘k’ nodes.
 
+// 1 -> 2 -> 3 -> 4 -> 5 -> null, k = 7 same as 2, k = 12 same as 2 => k % numOfNodes = k
+
+// total of 5 nodes
+// 5 - 2 = 3 => skip 3 nodes
+// go to node 4, make 4 the new head of the linkedlist
+// go to node 5, connect 5 with current head
+// make new tail for new linkedlist (node right before sublist)
+
+// first node: 5 -> 1 -> 2 -> 3 -> 4 -> null
+
+// second node: 4 -> 5 -> 1 -> 2 -> 3 -> null
+
 class Node {
   constructor(val, next = null) {
     this.val = val
@@ -9,43 +21,37 @@ class Node {
 }
 
 function rotate(head, k) {
-  // count num of nodes
+  // count the nodes
   let numOfNodes = 0
   let cur = head
+  let oldTail = null
   while (cur) {
+    if (!cur.next) oldTail = cur
     numOfNodes++
     cur = cur.next
   }
 
-  // simplify rotating
+  // simplify k
   k = k % numOfNodes
 
-  // go to node that is k nodes away from tail
-  let fast = head,
-    slow = head
-  while (fast && k > 0) {
-    fast = fast.next
-    k--
+  // nodes to skip
+  let nodesToSkip = numOfNodes - k - 1
+
+  // go to new tail
+  cur = head
+  while (nodesToSkip > 0) {
+    cur = cur.next
+    nodesToSkip--
   }
 
-  // fast is now k nodes away from slow
-  let oldTail = null
-  let prevOfSlow = null
+  // cur now is the new tail of linkedlist
+  const newHead = cur.next
 
-  while (fast) {
-    if (!fast.next) oldTail = fast
+  // make new tail
+  cur.next = null
 
-    fast = fast.next
-    prevOfSlow = slow
-    slow = slow.next
-  }
-
-  // reassign new head (cur)
-  const newHead = slow
-  // connect cur tail with cur head
+  // connect sublist with oldHead
   oldTail.next = head
-  // make a new tail (prev)
-  prevOfSlow.next = null
 
   return newHead
 }
