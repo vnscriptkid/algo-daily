@@ -4,33 +4,44 @@
 // Input: N=3
 // Output: ((())), (()()), (())(), ()(()), ()()()
 
-function generateBalancedParen(n, open = 0, close = 0, cur = '', all = []) {
+//    ''
+
+//            '('            can't start with ')'
+
+// '(('               '()'
+
+// '((('  '(()'      '()('   => can't add ) if #( === #)
+
+// '((()'  '(()('  '(())'   '()(('  '()()'            => if #( === n, can only add )
+//                                                    => if #( > #) => 2 choices
+
+// '((())' '(()()'  '(())('  '()(()' '()()('
+
+// '((()))' '(()())'  '(())()' '()(())' '()()()'
+
+function generateBalancedParen(n, cur = '', open = 0, close = 0, all = []) {
   // base case
-  // open === n, close === n
-  if (open === n && close === n) {
+  if (cur.length === n * 2) {
     all.push(cur)
     return
   }
 
-  const next = []
-  if (open === n) {
-    // case 1: open === n => next is close
-    next.push(')')
-  } else if (open > close) {
-    // case 2: open > close => next can be open or close
-    next.push('(')
-    next.push(')')
-  } else if (open === close) {
-    // case 3: open === close => next is open
-    next.push('(')
-  }
+  // generally, 2 choices
+  // 1. add (
+  // 2. add )
 
-  for (let choice of next) {
-    if (choice === '(') {
-      generateBalancedParen(n, open + 1, close, cur + choice, all)
-    } else {
-      generateBalancedParen(n, open, close + 1, cur + choice, all)
-    }
+  // case 1: open === close => (
+  if (open === close) {
+    generateBalancedParen(n, cur + '(', open + 1, close, all)
+  }
+  // case 2: open === n => )
+  else if (open === n) {
+    generateBalancedParen(n, cur + ')', open, close + 1, all)
+  }
+  // case 3: open > close => 2 choices
+  else if (open > close) {
+    generateBalancedParen(n, cur + '(', open + 1, close, all)
+    generateBalancedParen(n, cur + ')', open, close + 1, all)
   }
 
   return all
