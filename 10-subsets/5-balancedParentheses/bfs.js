@@ -4,6 +4,20 @@
 // Input: N=3
 // Output: ((())), (()()), (())(), ()(()), ()()()
 
+// queue:    ['']
+
+//           ['(']
+
+//  [  '((', '()'    ]
+
+// [ '(((', '(()', '()('  ] 3 strings
+
+// ['((()', '(()(', '(())', '()((', '()()'  ]: 5 strings
+
+// ['((())', '(()()', '(())(', '()(()', '()()('  ]: 5 strings
+
+// ['((()))', '(()())', '(())()', '()(())', '()()()'  ]
+
 class Paren {
   constructor(str, open, close) {
     this.str = str
@@ -19,15 +33,21 @@ function generateBalancedParen(n) {
   const output = []
 
   while (queue.length) {
+    // process all strings of prev level
     let levelSize = queue.length
-
     while (levelSize > 0) {
       const {str, open, close} = queue.shift()
+      levelSize--
 
-      if (open + close === 2 * n) {
+      if (str.length === n * 2) {
         output.push(str)
-        break
+        continue
       }
+
+      // build up new str, add back to queue
+      // open === close => (
+      // open === n => )
+      // open > close => (, )
 
       if (open < n) {
         queue.push(new Paren(str + '(', open + 1, close))
@@ -36,8 +56,6 @@ function generateBalancedParen(n) {
       if (open > close) {
         queue.push(new Paren(str + ')', open, close + 1))
       }
-
-      levelSize--
     }
   }
 
