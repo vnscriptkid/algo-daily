@@ -1,4 +1,4 @@
-const {findSmallestRange} = require('./index')
+const {findSmallestRange} = require('./final')
 
 test('it works 1', () => {
   const L1 = [1, 5, 8],
