@@ -1,6 +1,7 @@
 const {countSubsetSum: bruteforceFinal} = require('./bruteForceFinal')
 const {countSubsetSum: bruteForce} = require('./bruteForce')
 const {countSubsetSum: bottomUpFinal} = require('./bottomUpFinal')
+const {countSubsetSum: bottomUp} = require('./bottomUp')
 
 test('it works 1', () => {
   const set = [1, 1, 2, 3],
@@ -12,6 +13,9 @@ test('it works 1', () => {
   expect(result).toEqual(3)
 
   result = bottomUpFinal(set, sum)
+  expect(result).toEqual(3)
+
+  result = bottomUp(set, sum)
   expect(result).toEqual(3)
 })
 
@@ -25,5 +29,8 @@ test('it works 2', () => {
   expect(result).toEqual(3)
 
   result = bottomUpFinal(set, sum)
+  expect(result).toEqual(3)
+
+  result = bottomUp(set, sum)
   expect(result).toEqual(3)
 })
