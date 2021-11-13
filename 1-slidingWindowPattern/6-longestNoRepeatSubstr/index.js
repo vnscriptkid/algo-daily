@@ -5,36 +5,41 @@
 // Output: 3
 // Explanation: The longest substring without any repeating characters is "abc".
 
-function isRepeating(charMap, start, end) {
+// a a b c c b b
+//             ^
+//               $
+
+// longest: 3
+// cur: { b: 1 }
+
+function hasRepeatingChars(map, start, end) {
   const windowSize = end - start + 1
-  const keys = Object.keys(charMap).length
-  return keys < windowSize
+  const numOfDiffChars = Object.keys(map).length
+  return windowSize !== numOfDiffChars
 }
 
 function findLongestSubstrNoRepeat(str) {
-  const charMap = {}
-
   let windowStart = 0
+  const freq = {}
 
   let longest = 0
 
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    // add char at windowEnd to map
     let curChar = str[windowEnd]
-    if (!(curChar in charMap)) charMap[curChar] = 0
-    charMap[curChar]++
+    // add curChar to freq map
+    if (!(curChar in freq)) freq[curChar] = 0
+    freq[curChar]++
 
-    // adding curChar may make our window repeating
-    while (isRepeating(charMap, windowStart, windowEnd)) {
-      // remove char at windowStart from charMap
-      const firstChar = str[windowStart]
-      charMap[firstChar]--
-      if (charMap[firstChar] === 0) delete charMap[firstChar]
+    // by adding 1 char to our map, could make our window invalid
+    while (hasRepeatingChars(freq, windowStart, windowEnd)) {
+      let firstChar = str[windowStart]
+      freq[firstChar]--
+      if (freq[firstChar] === 0) delete freq[firstChar]
 
       windowStart++
     }
 
-    longest = Math.max(longest, Object.keys(charMap).length)
+    longest = Math.max(longest, Object.keys(freq).length)
   }
 
   return longest
