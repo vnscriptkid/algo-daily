@@ -7,25 +7,25 @@
 // So if the LinkedList has nodes 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null,
 // your method should return 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> null.
 
+// 1 -> 2 -> 3 -> 4 -> null
+//                $
+// 6 -> 5 -> 4 -> null
+//                 ^
+
+// 1 -> 6 -> 2 -> 5 -> 3 -> 4 -> 4
+
 // even
 // 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> null
 //               p1            p2
-
-//               null
-//                ^
-// 2 -> 4 -> 6 -> 8 <- 10 <- 12
-//          p1   p2
-
-// 2 -> 12 -> 4 -> 10 -> 6 -> 8
 
 // odd
 // 1 -> 2 -> 3 -> 4 -> 5 -> null
 //                m
 
-//               null
-//                ^
-// 1 -> 2 -> 3 -> 4 <- 5
-//          p1    p2
+// 1 -> 2 -> 3 -> 4 -> null
+//           ^
+// 5 -> 4 -> null
+//           $
 
 // 1 -> 5 -> 2 -> 4 -> 3
 
@@ -51,7 +51,7 @@ function findMiddle(head) {
   let slow = head,
     fast = head
 
-  while (fast && fast.next && fast.next) {
+  while (fast && fast.next) {
     slow = slow.next
     fast = fast.next.next
   }
@@ -59,25 +59,30 @@ function findMiddle(head) {
   return slow
 }
 
-function rearrange(head) {
-  // go to middle node
-  const middle = findMiddle(head)
-
-  // reverse sublist from middle
-  let cur = middle
+function reverse(head) {
+  let cur = head
   let prev = null
-  while (cur) {
-    let curNext = cur.next
-    cur.next = prev
 
+  while (cur) {
+    let nextOfCur = cur.next
+    cur.next = prev
     // update cur, prev
     prev = cur
-    cur = curNext
+    cur = nextOfCur
   }
 
-  // alternately merge 2 half
+  return prev
+}
+
+function rearrange(head) {
+  // find the middle node
+  const middle = findMiddle(head)
+  // reverse second half
+  const head2 = reverse(middle)
+  // combine them together
   let p1 = head,
-    p2 = prev
+    p2 = head2
+
   while (p1 && p2) {
     let nextOfP1 = p1.next
     let nextOfP2 = p2.next
@@ -85,13 +90,12 @@ function rearrange(head) {
     p1.next = p2
     p2.next = nextOfP1
 
+    // update p1 and p2
     p1 = nextOfP1
     p2 = nextOfP2
   }
 
-  if (p1 !== null) {
-    p1.next = null
-  }
+  if (p1) p1.next = null
 
   return head
 }
