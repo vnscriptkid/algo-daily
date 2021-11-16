@@ -8,32 +8,33 @@
 
 // [[4,5], [2,3], [3,6], [5,7], [7,8]]
 
-// [[2,3], [3,6], [4,5], [5,7], [7,8]]
+// [[2,3], [3,6] [4,5], [5,7], [7,8]]
+//
+// x [  ] {  }
+// x [  ]{     }
+// y [  { ]  }
 
-// [   ]
-//       [        ]
-//         [   ]
-//               [    ]
-
+// [                  ]
+//           {  }
+//                  [    ]
 function findConflictingAppointments(intervals) {
-  // sort by start time
   intervals.sort((a, b) => a[0] - b[0])
-
-  let prevInterval = intervals[0]
 
   const conflicts = []
 
-  for (let i = 1; i < intervals.length; i++) {
-    let curInterval = intervals[i]
+  let prev = intervals[0]
 
-    if (curInterval[0] < prevInterval[1]) {
-      // has conflict
-      const conflict = [prevInterval, curInterval]
+  for (let i = 1; i < intervals.length; i++) {
+    let cur = intervals[i]
+
+    // check conflict btw cur and prev
+    if (cur[0] < prev[1]) {
+      const conflict = [prev, cur]
       conflict.sort((a, b) => a[1] - b[1])
       conflicts.push(conflict)
     }
 
-    if (curInterval[1] > prevInterval[1]) prevInterval = curInterval
+    if (cur[1] > prev[1]) prev = cur
   }
 
   return conflicts
