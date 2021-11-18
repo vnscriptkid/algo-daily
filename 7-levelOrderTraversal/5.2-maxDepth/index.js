@@ -1,6 +1,4 @@
-// Minimum Depth of a Binary Tree
-// Find the minimum depth of a binary tree.
-// The minimum depth is the number of nodes along the shortest path from the root node to the nearest leaf node.
+// Given a binary tree, find its maximum depth (or height).
 
 //     1
 //    / \
@@ -22,13 +20,14 @@ function findMaxDepth(root) {
   const queue = [root]
 
   let depth = 0
-
   while (queue.length) {
     depth++
+    // process 1 level of tree
     let levelSize = queue.length
 
-    while (levelSize) {
-      const nodeOut = queue.shift()
+    // take out all nodes of cur level
+    while (levelSize > 0) {
+      let nodeOut = queue.shift()
 
       for (let child of [nodeOut.left, nodeOut.right]) {
         if (child) queue.push(child)
