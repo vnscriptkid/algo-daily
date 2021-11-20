@@ -1,6 +1,18 @@
 // Path With Given Sequence
 
-// Given a binary tree and a number sequence, find if the sequence is present as a root-to-leaf path in the given tree.
+// Given a binary tree and a sequence, find if the sequence is present as a root-to-leaf path in the given tree.
+
+// [1, 9, 9]
+
+//    1
+//   / \
+//  7   9
+//     / \
+//    2   9
+
+// keep track curIdx in sequence
+// nodeVal !== seq[curIdx] returns false
+// lastNumInSeq && leafNode && nodeVal === seq[curIdx] returns true
 
 class Node {
   constructor(val, left = null, right = null) {
@@ -10,21 +22,21 @@ class Node {
   }
 }
 
-function hasPathWithSequence(root, sequence, curIndex = 0) {
+function hasPathWithSequence(root, sequence, curIdx = 0) {
   if (!root) return false
 
-  // leaf node
-  const isLeafNode = !root.left && !root.right
-  const isLastInSeq = curIndex === sequence.length - 1
-  const isMatching = root.val === sequence[curIndex]
+  const matchingValues = root.val === sequence[curIdx]
 
-  if (isLeafNode && isLastInSeq && isMatching) return true
+  if (!matchingValues) return false
 
-  if (isLeafNode || isLastInSeq || !isMatching) return false
+  const lastNumInSeq = curIdx === sequence.length - 1
+  const leafNode = !root.left && !root.right
+
+  if (lastNumInSeq && leafNode) return true
 
   for (let child of [root.left, root.right]) {
     if (child) {
-      if (hasPathWithSequence(child, sequence, curIndex + 1)) return true
+      if (hasPathWithSequence(child, sequence, curIdx + 1) === true) return true
     }
   }
 
