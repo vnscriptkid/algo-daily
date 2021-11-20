@@ -21,7 +21,7 @@ function findMaxInBitonicArr(arr) {
     if (arr[middle] < arr[middle + 1]) {
       left++
     } else {
-      right--
+      right = middle
     }
   }
 
