@@ -1,4 +1,4 @@
-const {sortByFreq} = require('./index')
+const {sortByFreq} = require('.')
 
 test('it works 1', () => {
   const str = 'Programming'
