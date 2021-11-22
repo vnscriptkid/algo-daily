@@ -7,8 +7,8 @@ test('it works 1', () => {
   const result = findkPairs(L1, L2, K)
   expect(result).toEqual([
     [9, 3],
-    [8, 6],
     [9, 6],
+    [8, 6],
   ])
 })
 
