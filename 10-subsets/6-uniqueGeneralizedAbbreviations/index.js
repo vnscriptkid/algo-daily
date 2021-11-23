@@ -12,46 +12,42 @@
 // Output: "BAT", "BA1", "B1T", "B2", "1AT", "1A1", "2T", "3"
 
 //                             ['']
-//B:  [       'B'                              '1'          ]
-//A:  [ 'BA'            'B1'            '1A',        '11'    ]
-//T:  [ 'BAT' 'BA1' 'B1T'  'B11'    '1AT' '1A1'  '11T', '111']
+//B:  [         'B'                              '' (1)          ]
+//A:  [ 'BA'            'B1'            '1A' (0),        '' (2)   ]
+//T:  [ 'BAT' 'BA1' 'B1T'  'B11'    '1AT' '1A1'  '2T'(0), '3'(3)]
 //    [ 'BAT' 'BA1' 'B1T'  'B2'    '1AT' '1A1'  '2T', '3'    ]
 
+// Node: { curStr: '', idx: 0, count: 0}
+
 class Node {
-  constructor(cur, idx, count) {
-    this.cur = cur
+  constructor(curStr, idx, count) {
+    this.curStr = curStr
     this.idx = idx
     this.count = count
   }
 }
 
 function generateAbbreviations(word) {
-  const queue = [new Node('', 0, 0)]
+  const queue = []
+  queue.push(new Node('', 0, 0))
 
   const result = []
 
   while (queue.length) {
-    let levelSize = queue.length
+    let {curStr, idx, count} = queue.shift()
 
-    while (levelSize > 0) {
-      const {cur, idx, count} = queue.shift()
+    if (idx === word.length) {
+      if (count > 0) curStr += count
+      result.push(curStr)
+    } else {
       // 2 choices:
-      // choice 1: add char
-      let newCur = count > 0 ? cur + count : cur
-      newCur += word[idx]
-
-      const node1 = new Node(newCur, idx + 1, 0)
-      // choice 2: add 1
-      const node2 = new Node(cur, idx + 1, count + 1)
-
-      for (let node of [node1, node2]) {
-        if (idx + 1 === word.length) {
-          if (node.count > 0) node.cur += node.count
-          result.push(node.cur)
-        } else queue.push(node)
-      }
-
-      levelSize--
+      // choice 1: increment count
+      queue.push(new Node(curStr, idx + 1, count + 1))
+      // choice 2: add cur char: word[idx]
+      let newCurStr = curStr
+      if (count > 0) newCurStr += count
+      newCurStr += word[idx]
+      queue.push(new Node(newCurStr, idx + 1, 0))
     }
   }
 
