@@ -8,36 +8,37 @@ const Heap = require('collections/heap')
 // Output: "rrggmmPiano"
 // Explanation: 'r', 'g', and 'm' appeared twice, so they need to appear before any other character.
 
-// P r o g r a m m i n g
-//                     ^
-// { P: 1, r: 2, o: 1, g: 2, a: 1, m: 2, i: 1, n: 1 }
+// build char map O(n)
+// maxHeap: get the current highest-freq char
 
 function sortByFreq(str) {
-  // loop 1: build freq map
+  // build character map
   const freq = {}
   for (let char of str) {
     if (!(char in freq)) freq[char] = 0
     freq[char]++
   }
 
-  // loop 2: put it into a max heap
+  // init maxHeap, add all [char, freq]
   const maxHeap = new Heap([], null, (a, b) => a[1] - b[1])
   for (let char in freq) {
     maxHeap.add([char, freq[char]])
   }
 
-  // loop 3: sort in order
-  let sorted = ''
+  // take out each item from max heap, add chars to result
+  let result = ''
 
   while (maxHeap.length) {
     let [char, count] = maxHeap.pop()
+    // [a, 3]
+    // aaa
     while (count > 0) {
-      sorted += char
+      result += char
       count--
     }
   }
 
-  return sorted
+  return result
 }
 
 module.exports = {sortByFreq}
