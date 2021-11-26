@@ -1,6 +1,7 @@
 // Target Sum
 
-// You are given a set of positive numbers and a target sum ‘S’. Each number should be assigned either a ‘+’ or ‘-’ sign.
+// You are given a set of positive numbers and a target sum ‘S’.
+// Each number should be assigned either a ‘+’ or ‘-’ sign.
 // We need to find the total ways to assign symbols to make the sum of the numbers equal to the target ‘S’.
 
 function countWaysToAddSymbols(
