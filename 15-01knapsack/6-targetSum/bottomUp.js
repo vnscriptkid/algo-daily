@@ -4,31 +4,36 @@
 // Each number should be assigned either a ‘+’ or ‘-’ sign.
 // We need to find the total ways to assign symbols to make the sum of the numbers equal to the target ‘S’.
 
-// Input: {1, 1, 2, 3}, S=1 => sum: 7, target: 1 => newTarget: 4
+// Input: {1, 1, 2, 3}, S=1
 // Output: 3
 // Explanation: The given set has '3' ways to make a sum of '1': {+1-1-2+3} & {-1+1-2+3} & {+1+1+2-3}
 
-// s1 - s2 = target
-// s1 + s2 = sum
-// 2 * s1 = target + sum
-// s1 = (target + sum) / 2
+// +1-1-2+3
+// (1 + 3) - (1 + 2)
 
-//    0  1  2  3  4
-// 1  1  1  0  0  0
-// 1  1  2  1  0  0
-// 2  1  2  2  2
-// 3  1
+// {+1+1+2-3}
+// (1 + 1 + 2) - (3)
+// A - B = targetSum
+// A + B = sum
+// 2 * A = targetSum + sum
+// A = (targetSum + sum) / 2
+
+//   0  1  2  3  4
+// 1 1  1  0  0  0
+// 1 1  x
+// 2 1
+// 3 1           y
 
 function countWaysToAddSymbols(arr, target) {
-  const sum = arr.reduce((a, i) => a + i, 0)
-  const newTarget = Math.floor((target + sum) / 2)
+  let sum = arr.reduce((a, b) => a + b, 0)
 
-  const rows = arr.length
-  const cols = newTarget + 1
+  let newTarget = Math.floor((sum + target) / 2)
 
-  const dp = createMatrix(rows, cols)
+  let rows = arr.length
+  let cols = newTarget + 1
 
-  // init matrix
+  let dp = createMatrix(rows, cols)
+
   // first col
   for (let row of dp) row[0] = 1
   // first row
@@ -36,9 +41,8 @@ function countWaysToAddSymbols(arr, target) {
 
   for (let row = 1; row < rows; row++) {
     for (let col = 1; col < cols; col++) {
-      const curNum = arr[row]
-      // fill dp[row][col]
-      // 2 choices
+      let curNum = arr[row]
+
       // choice 1: skip curNum
       dp[row][col] += dp[row - 1][col]
       // choice 2: take curNum
