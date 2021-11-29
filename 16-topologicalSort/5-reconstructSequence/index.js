@@ -13,62 +13,53 @@
 // in the 'originalSeq'.
 
 function canReconstruct(originalSeq, seqsList) {
-  // build graph, incommings
   const graph = new Map()
   const incommings = new Map()
 
-  // init
+  // init graph and incommings
   for (let vertex of originalSeq) {
     graph.set(vertex, [])
     incommings.set(vertex, 0)
   }
 
-  for (const seqs of seqsList) {
-    for (let i = 1; i < seqs.length; i++) {
-      let prev = seqs[i - 1]
-      let cur = seqs[i]
+  // build graph and incommings from seqsList
+  for (let seq of seqsList) {
+    for (let i = 1; i < seq.length; i++) {
+      let dest = seq[i]
+      let source = seq[i - 1]
 
-      graph.get(prev).push(cur)
-      incommings.set(cur, incommings.get(cur) + 1)
+      graph.get(source).push(dest)
+      incommings.set(dest, incommings.get(dest) + 1)
     }
   }
 
-  const sources = [] // queue
+  // do topological sort
+  const ordering = []
+  const sources = [] // push, shift
+
   for (let [vertex, numOfDeps] of incommings.entries()) {
     if (numOfDeps === 0) sources.push(vertex)
   }
 
-  let count = 0
-  const sortedList = []
+  while (sources.length) {
+    if (sources.length > 1) return false
 
-  function countWaysToReconstruct(sources, sortedList) {
-    if (sortedList.length === originalSeq.length) {
-      count++
-      return
-    }
+    const nextVertex = sources.shift()
 
-    for (let i = 0; i < sources.length; i++) {
-      const source = sources[i]
-      sortedList.push(source)
-      // update incommings
-      let newSources = sources.filter(s => s !== source)
-      for (let dest of graph.get(source)) {
-        incommings.set(dest, incommings.get(dest) - 1)
+    ordering.push(nextVertex)
 
-        if (incommings.get(dest) === 0) newSources.push(dest)
-      }
-      countWaysToReconstruct(newSources, sortedList)
-      // backtrack
-      sortedList.pop()
-      for (let dest of graph.get(source)) {
-        incommings.set(dest, incommings.get(dest) + 1)
-      }
+    const lastIdx = ordering.length - 1
+
+    if (ordering[lastIdx] !== originalSeq[lastIdx]) return false
+
+    for (let dest of graph.get(nextVertex)) {
+      incommings.set(dest, incommings.get(dest) - 1)
+
+      if (incommings.get(dest) === 0) sources.push(dest)
     }
   }
 
-  countWaysToReconstruct(sources, sortedList)
-
-  return count === 1
+  return ordering.length === originalSeq.length
 }
 
 module.exports = {canReconstruct}
