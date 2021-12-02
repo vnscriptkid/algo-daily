@@ -29,3 +29,9 @@ test('it works 5', () => {
   const result = findSmallestMissingPositiveNumber(arr)
   expect(result).toEqual(6)
 })
+
+test('it works 6', () => {
+  const arr = [7, 8, 9, 11, 12]
+  const result = findSmallestMissingPositiveNumber(arr)
+  expect(result).toEqual(1)
+})
