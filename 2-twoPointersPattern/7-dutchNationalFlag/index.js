@@ -6,37 +6,39 @@
 // The flag of the Netherlands consists of three colors: red, white and blue;
 // and since our input array also consists of three different numbers that is why it is called Dutch National Flag problem.
 
-// Input: [2, 2, 0, 1, 2, 0]
-// Output: [0 0 1 2 2 2 ]
-
 // Input: [0, 0, 1, 2, 2, 2]
-//               ^$
-// Output: [0  0  1  2  2  2 ]
-//                ^$
+//              ^$
+//                  @
+// Output: [0 0 1 2 2 2 ]
+//              ^$
 
-function swap(arr, i, j) {
-  ;[arr[i], arr[j]] = [arr[j], arr[i]]
+function swap(arr, idx1, idx2) {
+  ;[arr[idx1], arr[idx2]] = [arr[idx2], arr[idx1]]
 }
 
 function dutchFlag(arr) {
   let left = 0,
     right = arr.length - 1
 
-  let curIdx = 0
-
-  while (curIdx <= right) {
-    let cur = arr[curIdx]
-    if (cur === 0) {
-      swap(arr, curIdx, left)
-      curIdx++
+  let cur = 0
+  while (cur <= right) {
+    if (arr[cur] === 0) {
+      swap(arr, cur, left)
       left++
-    } else if (cur === 1) {
-      curIdx++
+      if (left > cur) cur = left
+    } else if (arr[cur] === 1) {
+      cur++
     } else {
-      swap(arr, curIdx, right)
+      // cur num is 2
+      swap(arr, cur, right)
       right--
     }
   }
 }
+
+// const arr = [0, 2, 0, 1, 2, 2]
+//                 ^        $
+//                 @
+// dutchFlag(arr)
 
 module.exports = {dutchFlag}
