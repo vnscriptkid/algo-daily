@@ -11,6 +11,7 @@ function maximizeDistinctNumbers(nums, k) {
   // push all non-distinct numbers to minHeap
   // count current distinct
   const minHeap = new Heap([], null, (a, b) => b - a)
+
   let distinct = 0
   for (let count of Object.values(freq)) {
     if (count === 1) distinct += 1
