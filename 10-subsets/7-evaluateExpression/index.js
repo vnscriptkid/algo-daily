@@ -1,33 +1,35 @@
+// Evaluate Expression
+
+// Given an expression containing digits and operations (+, -, *),
+// find all possible ways in which the expression can be evaluated by grouping the numbers and operators using parentheses.
+
+// Input: "2*(3-4-5)"
+// Output: 8, -12, 7, -7, -3
+
+//           2 * 3 - 4 - 5
+//      2*(3-4-5)           (2*3)-(4-5)             (2*3-4)-5
+//       /      \                                  /        \
+// 2*(3-(4-5))  2*((3-4)-5)                    (2*(3-4))-5  ((2*3)-4)-5
+
+// [2]
+// *
+// [4, -6]
+// [8, -12]
+
 function evaluateExp(exp) {
-  let result = []
+  if (exp.length <= 3) return [eval(exp)]
 
-  if (exp.length <= 3) {
-    result.push(eval(exp))
-    return result
-  }
-  // 2 * 3 - 4 - 5
-  for (let [idx, char] of exp.split('').entries()) {
-    if (isNaN(char)) {
-      const leftExp = exp.substring(0, idx)
-      const rightExp = exp.substring(idx + 1)
+  const result = []
 
-      let leftResult, rightResult
+  for (let i = 0; i < exp.length; i++) {
+    if ('+-*'.includes(exp[i])) {
+      let leftResult = evaluateExp(exp.substring(0, i))
+      let rightResult = evaluateExp(exp.substring(i + 1))
 
-      if (leftExp) {
-        leftResult = evaluateExp(leftExp)
-      }
-
-      if (rightExp) {
-        rightResult = evaluateExp(rightExp)
-      }
-
-      if (!leftResult) return rightResult
-      if (!rightResult) return leftResult
-
-      for (let leftNum of leftResult) {
-        for (let rightNum of rightResult) {
-          if (rightNum < 0) rightNum = `(${rightNum})`
-          result.push(eval(`${leftNum}${char}${rightNum}`))
+      for (let x of leftResult) {
+        for (let y of rightResult) {
+          result.push(eval(`${x}${exp[i]}(${y})`))
+          // 2--2
         }
       }
     }
