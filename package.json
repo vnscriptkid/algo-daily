@@ -20,7 +20,8 @@
   "author": "stephen grider",
   "license": "ISC",
   "dependencies": {
-    "collections": "^5.1.12"
+    "collections": "^5.1.12",
+    "jest": "^27.4.6"
   },
   "devDependencies": {
     "@babel/cli": "^7.14.8",
