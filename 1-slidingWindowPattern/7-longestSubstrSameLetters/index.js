@@ -7,81 +7,50 @@
 // Output: 5
 // Explanation: Replace the two 'c' with 'b' to have a longest repeating substring "bbbbb".
 
-// class CharMap {
-//   constructor() {
-//     this.freq = {}
-//     this.countAll = 0
-//   }
+// dominantCharsCount = 3
+// longestValidStr: 5
 
-//   add(char) {
-//     if (!(char in this.freq)) this.freq[char] = 0
-//     this.freq[char]++
-//     this.countAll++
-//   }
+// { b: 3, c: 2 }
 
-//   remove(char) {
-//     this.freq[char]--
-//     if (!this.freq[char]) delete this.freq[char]
-//     this.countAll--
-//   }
-
-//   count(char) {
-//     return this.freq[char]
-//   }
-
-//   countExcept(char) {
-//     return this.countAll - this.count(char)
-//   }
-// }
+// a a b c c b b , k = 2
+//     ^
+//               $
 
 function findLongestSubstrSameLetters(str, k) {
-  // const map = new CharMap()
-  let maxRepeatCount = 0
-
-  let longestRepeatingAfterReplace = 0
   let windowStart = 0
 
   const freq = {}
+  let dominantCharsCount = 0
+  let longestValidStr = 0
 
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    // add char at `windowEnd` to freq charMap
-    const newChar = str[windowEnd]
+    // current window is valid, consider expanding it to find longer string
+    let curChar = str[windowEnd]
 
-    if (!(newChar in freq)) freq[newChar] = 0
-    freq[newChar]++
-    // map.add(newChar)
+    if (!(curChar in freq)) freq[curChar] = 0
+    freq[curChar]++
 
-    // this new char can make maxRepeatCount not longer true
-    maxRepeatCount = Math.max(maxRepeatCount, freq[newChar])
+    dominantCharsCount = Math.max(dominantCharsCount, freq[curChar])
 
-    // this new char can make current window not having same chars after replacement
+    // whether or not cur window is valid, if not shrink it down (to at least size of longestValidStr)
     let windowSize = windowEnd - windowStart + 1
-    let charsToReplace = windowSize - maxRepeatCount
-
+    let charsToReplace = windowSize - dominantCharsCount
     while (charsToReplace > k) {
-      // shrink the window down from windowStart
       let firstChar = str[windowStart]
 
       freq[firstChar]--
       if (freq[firstChar] === 0) delete freq[firstChar]
 
-      // TODO: is there anyway not to do re-find max req char again
-      maxRepeatCount = Math.max(...Object.values(freq))
-
       windowStart++
+
       windowSize = windowEnd - windowStart + 1
-      charsToReplace = windowSize - maxRepeatCount
+      charsToReplace = windowSize - dominantCharsCount
     }
 
-    longestRepeatingAfterReplace = Math.max(
-      longestRepeatingAfterReplace,
-      windowSize,
-    )
+    longestValidStr = Math.max(longestValidStr, windowSize)
   }
 
-  return longestRepeatingAfterReplace
+  return longestValidStr
 }
 
 module.exports = {findLongestSubstrSameLetters}
-
-// a a c b b , k = 2
