@@ -3,51 +3,66 @@
 // Given an array of unsorted numbers and a target number,
 // find all unique quadruplets in it, whose sum is equal to the target number.
 
-function searchTriplets(arr, target, left, right) {
-  const result = []
+// Input: [4, 1, 2, -1, 1, -3], target=1
+// Output: [-3, -1, 1, 4], [-3, 1, 1, 2]
+// Explanation: Both the quadruplets add up to the target.
 
-  for (let second = left; second <= right - 2; second++) {
-    let third = second + 1,
-      fourth = right
+// 4, 1, 2, -1, 1, -3 | twoSum, target = 3
+// -3 -1  1  1  2  4
+//              ^$
 
-    while (third < fourth) {
-      let sum = arr[second] + arr[third] + arr[fourth]
+// [[-1, 4], [1, 2]]
 
-      if (sum === target) {
-        result.push([arr[second], arr[third], arr[fourth]])
+function searchTriplets(arr, startIdx, target) {
+  const triplets = []
 
-        third++
-        while (arr[third] === arr[third - 1] && third < fourth) third++
+  for (let secondIdx = startIdx; secondIdx < arr.length - 2; secondIdx++) {
+    const secondNum = arr[secondIdx]
 
-        fourth--
-        while (arr[fourth] === arr[fourth + 1] && third < fourth) fourth--
-      } else if (sum < target) {
-        third++
+    let left = secondIdx + 1,
+      right = arr.length - 1
+
+    while (left < right) {
+      const curSum = secondNum + arr[left] + arr[right]
+
+      if (curSum === target) {
+        triplets.push([secondNum, arr[left], arr[right]])
+
+        // 1 1 1 2 ... 2 3
+        //       ^       $
+        left++
+        while (arr[left] === arr[left - 1] && left < right) left++
+
+        right--
+        while (arr[right] === arr[right + 1] && left < right) right--
+      } else if (curSum < target) {
+        left++
       } else {
-        fourth--
+        right--
       }
     }
   }
 
-  return result
+  return triplets
 }
 
 function searchQuadruplets(arr, target) {
+  // sort array in ascending order
   arr.sort((a, b) => a - b)
 
-  const result = []
+  const quadruplets = []
 
   for (let firstIdx = 0; firstIdx < arr.length - 3; firstIdx++) {
-    const triplets = searchTriplets(
-      arr,
-      target - arr[firstIdx],
-      firstIdx + 1,
-      arr.length - 1,
-    )
-    triplets.forEach(t => result.push([arr[firstIdx], ...t]))
+    let firstNum = arr[firstIdx]
+
+    const triplets = searchTriplets(arr, firstIdx + 1, target - firstNum)
+
+    triplets.forEach(triplet => {
+      quadruplets.push([firstNum, ...triplet])
+    })
   }
 
-  return result
+  return quadruplets
 }
 
 module.exports = {searchQuadruplets}
