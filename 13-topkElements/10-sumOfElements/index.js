@@ -9,25 +9,26 @@ const Heap = require('collections/heap')
 // Explanation: The 3rd smallest number is 5 and 6th smallest number 15. The sum of numbers coming
 // between 5 and 15 is 23 (11+12).
 
-function findMin(nums, k) {
+function sumOf(nums, k1, k2) {
+  const maxK = Math.max(k1, k2)
+  const minK = Math.min(k1, k2)
+  let numOfNums = maxK - minK - 1
+
   const maxHeap = new Heap([], null, (a, b) => a - b)
 
   for (let num of nums) {
     maxHeap.add(num)
 
-    if (maxHeap.length > k) maxHeap.pop()
+    if (maxHeap.length > maxK) maxHeap.pop()
   }
 
-  return maxHeap.peek()
-}
-
-function sumOf(nums, k1, k2) {
-  const lowBound = findMin(nums, Math.min(k1, k2))
-  const highBound = findMin(nums, Math.max(k1, k2))
-
   let sum = 0
-  for (let num of nums) {
-    if (num > lowBound && num < highBound) sum += num
+
+  maxHeap.pop()
+
+  while (numOfNums > 0) {
+    sum += maxHeap.pop()
+    numOfNums--
   }
 
   return sum
