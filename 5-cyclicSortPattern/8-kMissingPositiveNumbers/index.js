@@ -11,45 +11,57 @@
 // Output: [1, 2, 6]
 // Explanation: The smallest missing positive numbers are 1, 2 and 6.
 
-function findKmissingPositiveNumbers(arr, k) {
-  // first round: bring number in range (1, arr.length) to its correct position
-  let i = 0
-  while (i < arr.length) {
-    let curNum = arr[i]
+//  1  2   3  4  5  6
+//  _  _   x  x  x  _
+// [3, -1, 4, 5, 5], k=3
 
-    if (curNum < 1 || curNum > arr.length) {
+//  1  2   3  4  5
+// [6, -1, 3, 4, 5], k = 3
+//  _  _   x  x  x
+//
+//                  ^
+// [1, 2, ]
+
+function findKmissingPositiveNumbers(arr, k) {
+  // 1st loop: bring every numbers back to its correct position (1-n)
+  const n = arr.length
+  let i = 0
+  while (i < n) {
+    const curNum = arr[i]
+
+    if (curNum < 1 || curNum > n) {
       i++
       continue
     }
 
-    let correctIdx = curNum - 1
+    const correctIdx = curNum - 1
     if (i !== correctIdx && arr[correctIdx] !== correctIdx + 1) {
       ;[arr[i], arr[correctIdx]] = [arr[correctIdx], arr[i]]
     } else i++
   }
 
-  // second round: find incorrect position, remember numbers sitting there
-  const outsiders = new Set()
-  const missingNums = []
+  // 2nd loop: find numbers that are not at their correct positions
+  const missingPositive = []
 
-  for (let [idx, num] of arr.entries()) {
-    // exit early
-    if (missingNums.length === k) return missingNums
+  let sources = new Set()
 
-    if (num !== idx + 1) {
-      missingNums.push(idx + 1)
-      outsiders.add(num)
+  for (i = 0; i < n && missingPositive.length < k; i++) {
+    if (arr[i] !== i + 1) {
+      missingPositive.push(i + 1)
+      if (arr[i] > 0) sources.add(arr[i])
     }
   }
 
-  // not find enough, starting from numbers right after last one (check remembered list, could be there)
-  let nextMissing = arr.length + 1
-  while (missingNums.length < k) {
-    if (!outsiders.has(nextMissing)) missingNums.push(nextMissing)
-    nextMissing++
+  let nextCandidate = n + 1
+  while (missingPositive.length < k) {
+    if (!sources.has(nextCandidate)) missingPositive.push(nextCandidate)
+    nextCandidate++
+    // have not found enough k numbers?
+    //   - remaining numbers are out of range (1, arr.length)
+    //   - starts from (n + 1) , check if numbers exist in the original array (set)
   }
 
-  return missingNums
+  return missingPositive
 }
 
 module.exports = {findKmissingPositiveNumbers}

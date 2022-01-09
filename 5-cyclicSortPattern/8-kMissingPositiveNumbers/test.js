@@ -9,6 +9,11 @@ test('it works 1', () => {
 
 test('it works 2', () => {
   const arr = [2, 3, 4],
+    // 4 2 3
+    // _ x x
+    //       ^
+    // sources: (4)
+    // [1,5,6]
     k = 3
   const result = findKmissingPositiveNumbers(arr, k)
   expect(result).toEqual([1, 5, 6])
@@ -16,6 +21,8 @@ test('it works 2', () => {
 
 test('it works 3', () => {
   const arr = [-2, -3, 4],
+    // 1  2  3
+    // -2 -3 4
     k = 2
   const result = findKmissingPositiveNumbers(arr, k)
   expect(result).toEqual([1, 2])
