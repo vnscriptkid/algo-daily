@@ -13,30 +13,29 @@
 // sizeOfLongest: 6
 
 function longestSubarrayOfOnes(arr, k) {
-  let zeroesCount = 0
-  let longestOnes = 0
-
-  let windowStart = 0
-
-  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-    let curNum = arr[windowEnd]
-
-    if (curNum === 0) zeroesCount++
-
-    while (zeroesCount > k) {
-      let headNum = arr[windowStart]
-
-      if (headNum === 0) zeroesCount--
-
-      windowStart++
-    }
-
-    const windowSize = windowEnd - windowStart + 1
-
-    longestOnes = Math.max(longestOnes, windowSize)
+  // keep a count of zeroes
+  // let zeroesCount = 0;
+  const count = {
+    0: 0,
+    1: 0,
   }
 
-  return longestOnes
+  let windowStart = 0
+  let longest = 0
+  for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
+    // expand window as long as zeroesCount <= k
+    count[arr[windowEnd]]++
+
+    while (count[0] > k) {
+      // shrink down when zeroesCount > k
+      count[arr[windowStart]]--
+      windowStart++
+    }
+    // check windowSize at valid state to update longestOfOnes
+    longest = Math.max(windowEnd - windowStart + 1, longest)
+  }
+
+  return longest
 }
 
 module.exports = {longestSubarrayOfOnes}
