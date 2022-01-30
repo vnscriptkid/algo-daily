@@ -11,29 +11,34 @@
 // Input: str1="xp#", str2="xyz##"
 // Output: true
 
-function findNextIdx(str, curIdx, backspaces = 0) {
+// compare one char in str1 and one corresponding char in str2
+// ignore # and deleted chars
+
+// backSpacesCount = 0
+// str1="x p #"
+//       ^
+
+// backSpacesCount = 0
+// str2="x y z # #"
+//       $
+
+// x #
+// ^
+function findNextIdx(str, curIdx, backSpacesCount = 0) {
   if (curIdx === -1) return -1
 
-  const isAlphabet = str[curIdx].match(/[a-z]/i)
+  let curChar = str[curIdx]
+  let isBackspace = curChar === '#'
 
-  // _ _ _ a | backspaces === 0
-  //       ^
-  // return a
-  if (isAlphabet && backspaces === 0) return curIdx
+  // 2. backspace #
+  if (isBackspace) return findNextIdx(str, curIdx - 1, backSpacesCount + 1)
 
-  // _ _ _ # | backspaces = x
-  //       ^
-  // move on, backspaces += 1
+  // 1. alphabet char
+  //   1.2. non-deleted char (backSpacesCount === 0)
+  if (backSpacesCount === 0) return curIdx
 
-  // _ _ _ a | backspaces === x (> 0)
-  //       ^
-  // move on, backspaces -= 1
-
-  return findNextIdx(
-    str,
-    curIdx - 1,
-    isAlphabet ? backspaces - 1 : backspaces + 1,
-  )
+  //   1.1. deleted char (backSpacesCount > 0)
+  return findNextIdx(str, curIdx - 1, backSpacesCount - 1)
 }
 
 function compareStrings(str1, str2) {
@@ -41,6 +46,7 @@ function compareStrings(str1, str2) {
     p2 = str2.length - 1
 
   while (p1 >= 0 && p2 >= 0) {
+    // find next chars that are not # and not deleted chars
     p1 = findNextIdx(str1, p1)
     p2 = findNextIdx(str2, p2)
 
