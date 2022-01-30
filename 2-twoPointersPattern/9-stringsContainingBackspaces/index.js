@@ -11,21 +11,29 @@
 // Input: str1="xp#", str2="xyz##"
 // Output: true
 
-function findNextIdx(str, idx) {
-  if (str[idx] !== '#') return idx
+function findNextIdx(str, curIdx, backspaces = 0) {
+  if (curIdx === -1) return -1
 
-  let count = 0
-  while (idx >= 0 && str[idx] === '#') {
-    count++
-    idx--
-  }
+  const isAlphabet = str[curIdx].match(/[a-z]/i)
 
-  while (count > 0) {
-    idx--
-    count--
-  }
+  // _ _ _ a | backspaces === 0
+  //       ^
+  // return a
+  if (isAlphabet && backspaces === 0) return curIdx
 
-  return idx
+  // _ _ _ # | backspaces = x
+  //       ^
+  // move on, backspaces += 1
+
+  // _ _ _ a | backspaces === x (> 0)
+  //       ^
+  // move on, backspaces -= 1
+
+  return findNextIdx(
+    str,
+    curIdx - 1,
+    isAlphabet ? backspaces - 1 : backspaces + 1,
+  )
 }
 
 function compareStrings(str1, str2) {
@@ -36,13 +44,15 @@ function compareStrings(str1, str2) {
     p1 = findNextIdx(str1, p1)
     p2 = findNextIdx(str2, p2)
 
+    if (p1 < 0 || p2 < 0) break
+
     if (str1[p1] !== str2[p2]) return false
 
     p1--
     p2--
   }
 
-  return p1 < 0 && p2 < 0
+  return p1 === -1 && p2 === -1
 }
 
 module.exports = {compareStrings}
