@@ -5,6 +5,7 @@
 // You can assume that each list of employee working hours is sorted on the start time.
 
 // Input: Employee Working Hours=[[[1,3], [9,12]], [[2,4]], [[6,8]]]
+//                               [ [1,3],  [2,4], [6,8], [9,12] ]
 // Output: [4,6], [8,9]
 // Explanation: All employess are free between [4,6] and [8,9].
 
@@ -14,25 +15,44 @@
 //   {   }   {   }
 
 function findCommonFreetime(workingHours) {
-  let flat = []
-  for (let intervalsOfUser of workingHours) {
-    flat = [...flat, ...intervalsOfUser]
+  // flat the input out
+  const flat = []
+  for (let subArray of workingHours) {
+    for (let interval of subArray) {
+      flat.push(interval)
+    }
   }
+
+  // sort the flat arr by startTime
   flat.sort((a, b) => a[0] - b[0])
 
+  // interate every interval, compare curStartTime with prevEndTime
+  let prevEndtime = flat[0][1]
   const freetimes = []
 
-  let endOfPrev = flat[0][1]
   for (let i = 1; i < flat.length; i++) {
-    let [start, end] = flat[i]
-    if (start <= endOfPrev) {
-      // overlaps
-      endOfPrev = Math.max(end, endOfPrev)
-    } else {
-      // there's freetime
-      freetimes.push([endOfPrev, start])
-      endOfPrev = end
+    let [curStarttime, curEndtime] = flat[i]
+
+    // case 1
+    // [   ]
+    //   {   }
+    //      (   )
+
+    // case 2
+    // [     ]
+    //   { }
+    //         (   )
+
+    // case 3
+    //  [   ]
+    //          {   }
+    //                   (  )
+
+    if (curStarttime > prevEndtime) {
+      freetimes.push([prevEndtime, curStarttime])
     }
+
+    prevEndtime = Math.max(prevEndtime, curEndtime)
   }
 
   return freetimes
