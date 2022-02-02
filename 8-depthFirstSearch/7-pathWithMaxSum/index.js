@@ -12,33 +12,48 @@ class Node {
   }
 }
 
+//     -1
+//     / \
+//   -3   null
+
 function maxSumPath(root) {
-  function _maxSumPath(curRoot) {
-    if (!curRoot) {
+  function _maxSumPath(root) {
+    if (!root)
       return {
-        rootLeafMax: 0,
-        pathMax: 0,
+        maxSum: -Infinity,
+        maxRootToLeafSum: -Infinity,
+      }
+
+    // leaf node
+    if (!root.left && !root.right) {
+      return {
+        maxSum: root.val,
+        maxRootToLeafSum: root.val,
       }
     }
 
-    const {rootLeafMax: rootLeafMaxLeft, pathMax: pathMaxLeft} = _maxSumPath(
-      curRoot.left,
-    )
-    const {rootLeafMax: rootLeafMaxRight, pathMax: pathMaxRight} = _maxSumPath(
-      curRoot.right,
-    )
+    let {maxSum: maxSumLeft, maxRootToLeafSum: maxRootToLeafSumLeft} =
+      _maxSumPath(root.left)
+    let {maxSum: maxSumRight, maxRootToLeafSum: maxRootToLeafSumRight} =
+      _maxSumPath(root.right)
+
+    // maxSumLeft = Math.max(maxSumLeft, 0)
+    // maxSumRight = Math.max(maxSumRight, 0)
+    maxRootToLeafSumLeft = Math.max(maxRootToLeafSumLeft, 0)
+    maxRootToLeafSumRight = Math.max(maxRootToLeafSumRight, 0)
 
     return {
-      rootLeafMax: curRoot.val + Math.max(rootLeafMaxLeft, rootLeafMaxRight),
-      pathMax: Math.max(
-        pathMaxLeft,
-        pathMaxRight,
-        curRoot.val + rootLeafMaxLeft + rootLeafMaxRight,
+      maxSum: Math.max(
+        maxSumLeft,
+        maxSumRight,
+        maxRootToLeafSumLeft + maxRootToLeafSumRight + root.val,
       ),
+      maxRootToLeafSum:
+        root.val + Math.max(maxRootToLeafSumLeft, maxRootToLeafSumRight),
     }
   }
 
-  return _maxSumPath(root).pathMax
+  return _maxSumPath(root).maxSum
 }
 
 module.exports = {maxSumPath, Node}

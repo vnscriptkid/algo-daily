@@ -46,12 +46,12 @@ test('it works 2', () => {
 })
 
 // TODO
-// test("it works 3", () => {
-//   const nodeMinus1 = new Node(-1);
-//   const nodeMinus3 = new Node(-3);
+test('it works 3', () => {
+  const nodeMinus1 = new Node(-1)
+  const nodeMinus3 = new Node(-3)
 
-//   nodeMinus1.left = nodeMinus3;
+  nodeMinus1.left = nodeMinus3
 
-//   const result = maxSumPath(nodeMinus1);
-//   expect(result).toEqual(-1);
-// });
+  const result = maxSumPath(nodeMinus1)
+  expect(result).toEqual(-1)
+})
