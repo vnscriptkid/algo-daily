@@ -1,4 +1,4 @@
-const {countUniqueBST} = require('./final')
+const {countUniqueBST} = require('./index')
 
 test('it works 1', () => {
   const result = countUniqueBST(2)
