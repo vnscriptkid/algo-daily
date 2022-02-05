@@ -25,29 +25,31 @@ function maximizeDistinctNumbers(nums, k) {
     freq[num]++
   }
   // char with freq 1 should not be touched
-  const minHeap = new Heap([], null, (a, b) => b[1] - a[1])
+  const minHeap = new Heap([], null, (a, b) => b - a)
 
-  let distinctNums = 0
+  let distinctEles = 0
 
   for (let num in freq) {
-    if (freq[num] === 1) {
-      delete freq[num]
-      distinctNums++
-    } else minHeap.add([num, freq[num]])
+    if (freq[num] > 1) minHeap.add(freq[num])
+    /* freq[num] === 1 */ else distinctEles++
   }
 
   // favor of removing chars with freq of 2 upward (heap)
   // [num, freq]
+
   while (k > 0 && minHeap.length) {
-    const [num, count] = minHeap.pop()
+    let count = minHeap.pop()
 
-    if (count > 2) minHeap.add([num, count - 1])
-    /* count === 2 */ else distinctNums++
+    let deletingAmount = count - 1 <= k ? count - 1 : k
 
-    k--
+    k -= deletingAmount
+    count -= deletingAmount
+
+    if (count > 1) minHeap.push(count)
+    else distinctEles++
   }
 
-  return k > 0 ? distinctNums - k : distinctNums
+  return k > 0 ? distinctEles - k : distinctEles
 }
 
 module.exports = {maximizeDistinctNumbers}
