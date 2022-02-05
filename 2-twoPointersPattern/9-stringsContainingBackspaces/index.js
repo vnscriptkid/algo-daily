@@ -11,21 +11,34 @@
 // Input: str1="xp#", str2="xyz##"
 // Output: true
 
-function findNextIdx(str, idx) {
-  if (str[idx] !== '#') return idx
+// compare one char in str1 and one corresponding char in str2
+// ignore # and deleted chars
 
-  let count = 0
-  while (idx >= 0 && str[idx] === '#') {
-    count++
-    idx--
-  }
+// backSpacesCount = 0
+// str1="x p #"
+//       ^
 
-  while (count > 0) {
-    idx--
-    count--
-  }
+// backSpacesCount = 0
+// str2="x y z # #"
+//       $
 
-  return idx
+// x #
+// ^
+function findNextIdx(str, curIdx, backSpacesCount = 0) {
+  if (curIdx === -1) return -1
+
+  let curChar = str[curIdx]
+  let isBackspace = curChar === '#'
+
+  // 2. backspace #
+  if (isBackspace) return findNextIdx(str, curIdx - 1, backSpacesCount + 1)
+
+  // 1. alphabet char
+  //   1.2. non-deleted char (backSpacesCount === 0)
+  if (backSpacesCount === 0) return curIdx
+
+  //   1.1. deleted char (backSpacesCount > 0)
+  return findNextIdx(str, curIdx - 1, backSpacesCount - 1)
 }
 
 function compareStrings(str1, str2) {
@@ -33,8 +46,11 @@ function compareStrings(str1, str2) {
     p2 = str2.length - 1
 
   while (p1 >= 0 && p2 >= 0) {
+    // find next chars that are not # and not deleted chars
     p1 = findNextIdx(str1, p1)
     p2 = findNextIdx(str2, p2)
+
+    if (p1 < 0 || p2 < 0) break
 
     if (str1[p1] !== str2[p2]) return false
 
@@ -42,7 +58,7 @@ function compareStrings(str1, str2) {
     p2--
   }
 
-  return p1 < 0 && p2 < 0
+  return p1 === -1 && p2 === -1
 }
 
 module.exports = {compareStrings}

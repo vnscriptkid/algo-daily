@@ -12,23 +12,42 @@ class Node {
   }
 }
 
-// [, 3]
-// prev: 1
-// cur: 2
+//    1
+//   / \
+//  2   3
+// / \ / \
+//4  5 6  7
+
+// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
+
+//         1
+//        /  \
+//       2    3
+//      / \  / \
+//     4  5 6  7
+
+// use level order travesal using queue
+
+// queue:  <- [  ] <-
+
+// nodeOut: 7
+
+// 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> null
 
 function connectAllLevelSiblings(root) {
-  const queue = [root]
+  const queue = [root] // push (enqueue), shift (dequeue)
 
   while (queue.length) {
+    // take out 1 node from queue
     const nodeOut = queue.shift()
 
+    // find it's children, add to the queue
     for (let child of [nodeOut.left, nodeOut.right]) {
       if (child) queue.push(child)
     }
 
-    let nextNode = queue.length ? queue[0] : null
-
-    nodeOut.next = nextNode
+    // make connection from nodeOut to node at the head of the queue
+    if (queue.length) nodeOut.next = queue[0]
   }
 
   return root

@@ -7,36 +7,42 @@
 // Output: 6
 // Explanation: Replace the '0' at index 5 and 8 to have the longest contiguous subarray of 1s having length 6.
 
+// translation: find the longest subarray with maximum of k 0s
+
+// zerosCount = 2
+// longestSubarraySize = 6
+
 // [0, 1, 1, 0, 0, 0, 1, 1, 0, 1, 1], k=2
-//                 ^              $
-// numOfZeroes: 2
-// sizeOfLongest: 6
+//                 ^
+//                                   $
 
 function longestSubarrayOfOnes(arr, k) {
-  let zeroesCount = 0
-  let longestOnes = 0
-
   let windowStart = 0
+  let zerosCount = 0
+  let longestSubarraySize = 0
 
   for (let windowEnd = 0; windowEnd < arr.length; windowEnd++) {
-    let curNum = arr[windowEnd]
+    // assumption: current window is valid, i want to expand it the find better window
+    let newNum = arr[windowEnd]
 
-    if (curNum === 0) zeroesCount++
+    if (newNum === 0) zerosCount++
 
-    while (zeroesCount > k) {
-      let headNum = arr[windowStart]
-
-      if (headNum === 0) zeroesCount--
-
+    // adding new number could make our window invalid (zerosCount > K)
+    while (zerosCount > k) {
+      // shrink the window down
+      let firstNum = arr[windowStart]
+      if (firstNum === 0) zerosCount--
       windowStart++
     }
 
-    const windowSize = windowEnd - windowStart + 1
-
-    longestOnes = Math.max(longestOnes, windowSize)
+    // zerosCount <= k now
+    longestSubarraySize = Math.max(
+      longestSubarraySize,
+      windowEnd - windowStart + 1 /* current window sizes */,
+    )
   }
 
-  return longestOnes
+  return longestSubarraySize
 }
 
 module.exports = {longestSubarrayOfOnes}

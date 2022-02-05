@@ -8,19 +8,13 @@
 // Input: [4, 6, 6, 6, 9], key = 6
 // Output: [1, 3]
 
+// [4, 6, 6, 6, 9]
+//  l     m     r
+
 // Input: [1, 3, 8, 10, 15], key = 12
 // Output: [-1, -1]
 
-function findNumberRange(arr, key) {
-  const range = [-1, -1]
-
-  range[0] = findBoundary(arr, key, true)
-  range[1] = findBoundary(arr, key, false)
-
-  return range
-}
-
-function findBoundary(arr, key, searchingMinIdx = true) {
+function findIdx(arr, key, findFirst) {
   let left = 0,
     right = arr.length - 1
 
@@ -30,21 +24,31 @@ function findBoundary(arr, key, searchingMinIdx = true) {
     let middle = Math.floor(left + (right - left) / 2)
 
     if (arr[middle] === key) {
-      // keep searching
       foundIdx = middle
-      if (searchingMinIdx) {
+      if (findFirst) {
         right = middle - 1
       } else {
+        // findLast
         left = middle + 1
       }
-    } else if (key > arr[middle]) {
-      left = middle + 1
-    } else {
+    } else if (arr[middle] > key) {
       right = middle - 1
+    } else {
+      // arr[middle] < key
+      left = middle + 1
     }
   }
 
   return foundIdx
+}
+
+function findNumberRange(arr, key) {
+  let [first, last] = [-1, -1]
+
+  first = findIdx(arr, key, true)
+  last = findIdx(arr, key, false)
+
+  return [first, last]
 }
 
 module.exports = {findNumberRange}
