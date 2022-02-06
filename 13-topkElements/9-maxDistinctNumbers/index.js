@@ -10,46 +10,45 @@
 // Another solution could be to remove one instance of '5' and '3' each to be left with three
 // distinct numbers [7, 5, 8], in this case, we have to skip 3 because it occurred twice.
 
-// { 7: 1, 3: 3, 5: 2, 8: 1 }
-// distinct: 3
-// {  }
-
 const Heap = require('collections/heap')
 
 function maximizeDistinctNumbers(nums, k) {
-  // know freq of each char
+  // build a freq map { number: it's freq }
   const freq = {}
 
   for (let num of nums) {
     if (!(num in freq)) freq[num] = 0
     freq[num]++
   }
-  // char with freq 1 should not be touched
+
+  // don't need to remove numbers appear once (distinct by itself)
+  // start to remove from numbers appear twice upward (heap)
+  // numFreq
   const minHeap = new Heap([], null, (a, b) => b - a)
 
-  let distinctEles = 0
+  let distinctNums = 0
 
   for (let num in freq) {
     if (freq[num] > 1) minHeap.add(freq[num])
-    /* freq[num] === 1 */ else distinctEles++
+    /* freq[num] === 1 */ else distinctNums++
   }
 
-  // favor of removing chars with freq of 2 upward (heap)
-  // [num, freq]
-
+  // loop: remove until we're out of k
   while (k > 0 && minHeap.length) {
-    let count = minHeap.pop()
+    let numFreq = minHeap.pop()
 
-    let deletingAmount = count - 1 <= k ? count - 1 : k
+    // we want to delete (numFreq - 1)
+    // maximum deletions we can make here is k
+    const deletions = numFreq - 1 <= k ? numFreq - 1 : k
 
-    k -= deletingAmount
-    count -= deletingAmount
+    numFreq -= deletions
+    k -= deletions
 
-    if (count > 1) minHeap.push(count)
-    else distinctEles++
+    if (numFreq > 1) minHeap.add(numFreq)
+    /* numFreq === 1 */ else distinctNums++
   }
 
-  return k > 0 ? distinctEles - k : distinctEles
+  return k > 0 ? distinctNums - k : distinctNums
 }
 
 module.exports = {maximizeDistinctNumbers}

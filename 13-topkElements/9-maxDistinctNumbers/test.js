@@ -9,7 +9,11 @@ test('it works 1', () => {
 
 test('it works 2', () => {
   const arr = [3, 5, 12, 11, 12],
-    k = 3
+    // {3: 1, 5: 1: 12: 2: 11: 1}
+    // distinctNums = 4
+    // heap: [  ]
+    // k = 3
+    k = 2
   const result = maximizeDistinctNumbers(arr, k)
   expect(result).toEqual(2)
 })
