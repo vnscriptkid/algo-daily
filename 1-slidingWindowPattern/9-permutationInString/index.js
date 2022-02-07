@@ -2,7 +2,8 @@
 
 // Given a string and a pattern, find out if the string contains any permutation of the pattern.
 
-// Permutation is defined as the re-arranging of the characters of the string. For example, “abc” has the following six permutations:
+// Permutation is defined as the re-arranging of the characters of the string.
+// For example, “abc” has the following six permutations:
 
 // abc
 // acb
@@ -16,83 +17,51 @@
 // Output: true
 // Explanation: The string contains "bca" which is a permutation of the given pattern.
 
-class CharMap {
-  constructor(str) {
-    this.str = str
-    this.map = {}
-    this._size = 0
-    this.init()
-  }
+// o i d b c a f | Pattern="abc" => { a: 0, b: 1, c: 1 }
+//       ^
+//           $
 
-  init() {
-    for (let char of this.str) {
-      this.add(char)
-    }
-  }
-
-  add(char) {
-    if (!(char in this.map)) this.map[char] = 0
-    this.map[char]++
-    this._size++
-  }
-
-  remove(char) {
-    if (!(char in this.map)) throw new Error('oops')
-    this.map[char]--
-    this._size--
-    if (this.map[char] === 0) delete this.map[char]
-  }
-
-  has(char) {
-    return char in this.map
-  }
-
-  freq(char) {
-    if (!(char in this.map)) throw new Error('oops')
-
-    return this.map[char]
-  }
-
-  reset() {
-    this.map = {}
-    this._size = 0
-  }
-
-  size() {
-    return this._size
-  }
-
-  static build(str) {
-    return new CharMap(str)
-  }
-}
+// adb
 
 function findPermutation(str, pattern) {
-  const patternMap = CharMap.build(pattern)
+  const freq = {}
+
+  for (let char of pattern) {
+    if (!(char in freq)) freq[char] = 0
+    freq[char]++
+  }
 
   let windowStart = 0
 
-  const curMap = CharMap.build('')
+  let matched = 0
 
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    const char = str[windowEnd]
+    // assuming current window is valid, yet to be matched, we want to expand current window
+    let rightChar = str[windowEnd]
 
-    if (!patternMap.has(char)) {
-      windowStart = windowEnd + 1
-      curMap.reset()
-      continue
+    if (rightChar in freq) {
+      freq[rightChar]--
+
+      if (freq[rightChar] === 0) matched++
     }
 
-    curMap.add(char)
+    if (matched === Object.keys(freq).length) return true
 
-    while (curMap.freq(char) > patternMap.freq(char)) {
-      let firstChar = str[windowStart]
-
-      curMap.remove(firstChar)
+    // is the size of window equals to pattern size and still not match the pattern
+    // shrink it down
+    let windowSize = windowEnd - windowStart + 1
+    if (windowSize >= pattern.length) {
+      let leftChar = str[windowStart]
       windowStart++
-    }
 
-    if (patternMap.size() === curMap.size()) return true
+      if (leftChar in freq) {
+        if (freq[leftChar] === 0) {
+          matched--
+        }
+
+        freq[leftChar]++
+      }
+    }
   }
 
   return false
