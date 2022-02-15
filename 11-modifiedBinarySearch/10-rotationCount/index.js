@@ -1,32 +1,40 @@
-// Search in Rotated Array (medium) #
-// Given an array of numbers which is sorted in ascending order and also rotated by some arbitrary number,
-// find if a given ‘key’ is present in it.
+// Rotation Count (medium) #
+// Given an array of numbers which is sorted in ascending order and is rotated ‘k’ times around a pivot, find ‘k’.
 
-// Write a function to return the index of the ‘key’ in the rotated array. If the ‘key’ is not present, return -1.
-// You can assume that the given array does not have any duplicates.
+// You can assume that the array does not have any duplicates.
 
 // Example 1:
-// Input: [10, 15, 1, 3, 8], key = 15
-// Output: 1
-// Explanation: '15' is present in the array at index '1'.
+//         10 15 1 3 8
+// Input: [10, 15, 1, 3, 8]
+// Output: 2
+// Explanation: The array has been rotated 2 times.
 
 // Example 2:
-// Input: [4, 5, 7, 9, 10, -1, 2], key = 10
-// Output: 4
-// Explanation: '10' is present in the array at index '4'.
+// Input: [4, 5, 7, 9, 10, -1, 2]
+// Output: 5
+// Explanation: The array has been rotated 5 times.
 
 function countRotations(arr) {
-  // find idx of smallest number
   let left = 0,
     right = arr.length - 1
-  while (left < right) {
-    let middle = left + Math.floor((right - left) / 2)
 
-    if (middle - 1 >= left && arr[middle - 1] > arr[middle]) return middle
-    if (middle + 1 <= right && arr[middle] > arr[middle + 1]) return middle + 1
+  // searching for idx for minimum number
+  while (left <= right) {
+    let middle = Math.floor(left + (right - left) / 2)
 
-    if (arr[left] <= arr[middle]) left = middle + 1
-    else right = middle - 1
+    if (middle - 1 >= 0 && arr[middle] < arr[middle - 1]) return middle
+
+    if (middle + 1 < arr.length && arr[middle] > arr[middle + 1])
+      return middle + 1
+
+    // middle is in green or red?
+    if (arr[middle] >= arr[left]) {
+      // red portion
+      left = middle + 2
+    } else {
+      // green portion
+      right = middle - 1
+    }
   }
 
   return 0
