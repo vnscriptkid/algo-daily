@@ -12,70 +12,60 @@
 // Write a function to return a list of starting indices of the anagrams of the pattern in the given string.
 
 // String="p p a q q p", Pattern="pq"
-// {  }
 
-class CharMap {
-  constructor(str) {
-    this.map = {}
+// Input: String="abbcabc", Pattern="abc"
+// Output: [2, 3, 4]
+// Explanation: The three anagrams of the pattern in the given string are "bca", "cab", and "abc".
+// a b b c a b c
+//         ^
+//             $
 
-    for (let char of str) {
-      this.add(char)
-    }
-  }
-
-  add(char) {
-    if (!(char in this.map)) this.map[char] = 0
-    this.map[char]++
-  }
-
-  remove(char) {
-    this.map[char]--
-    if (this.map[char] === 0) delete this.map[char]
-  }
-
-  freq(char) {
-    return this.map[char]
-  }
-
-  has(char) {
-    return char in this.map
-  }
-}
+// matches: 3
+// window: {  a: 1, b: 1, c: 1 }
+// pattern: { a: 1, b: 1, c: 1 }
+// result: [2, 3, 4]
 
 function findAnagrams(str, pattern) {
-  const patternCharMap = new CharMap(pattern)
+  const patternMap = {}
 
-  const curCharMap = new CharMap('')
+  for (let char of pattern) {
+    if (!(char in patternMap)) patternMap[char] = 0
+    patternMap[char]++
+  }
 
+  let needToMatch = Object.keys(patternMap).length
+
+  const result = []
   let windowStart = 0
-  const output = []
-
+  let curMatch = 0
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    let newChar = str[windowEnd]
+    let curChar = str[windowEnd]
+    if (curChar in patternMap) {
+      patternMap[curChar]--
 
-    if (!patternCharMap.has(newChar)) {
-      windowStart = windowEnd + 1
-      curCharMap.clear()
-      continue
+      if (patternMap[curChar] === 0) curMatch++
+      else if (patternMap[curChar] === -1) curMatch--
     }
 
-    curCharMap.add(newChar)
-
-    while (
-      windowEnd - windowStart + 1 > pattern.length ||
-      curCharMap.freq(newChar) > patternCharMap.freq(newChar)
-    ) {
-      let firstChar = str[windowStart]
-      curCharMap.remove(firstChar)
-      windowStart++
-    }
+    if (curMatch === needToMatch) result.push(windowStart)
 
     let windowSize = windowEnd - windowStart + 1
 
-    if (windowSize === pattern.length) output.push(windowStart)
+    if (windowSize === pattern.length) {
+      // shrink down
+      let firstChar = str[windowStart]
+      windowStart++
+
+      if (firstChar in patternMap) {
+        if (patternMap[firstChar] === 0) curMatch--
+        else if (patternMap[firstChar] === -1) curMatch++
+
+        patternMap[firstChar]++
+      }
+    }
   }
 
-  return output
+  return result
 }
 
 module.exports = {findAnagrams}
