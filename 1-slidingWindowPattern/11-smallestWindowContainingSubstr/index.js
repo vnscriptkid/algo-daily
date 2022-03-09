@@ -1,57 +1,72 @@
 // Smallest Window containing Substring
 
+// Given a string and a pattern,
+// find the smallest substring in the given string which has all the characters of the given pattern.
+
 // Input: String="aabdec", Pattern="abc"
 // Output: "abdec"
+// Explanation: The smallest substring having all characters of the pattern is "abdec"
 
 // a a b d e c
-//   ^
-//           $
+//     ^
+//             $
 
-// {a: 2, b: 1, d: 1,e: 1, c: 1}
-// matched: 3
+// matched = 2;
+// { a: 1, b: 0, c: 0 }
+
+// candidates: [ aabdec, abdec  ]
+
+// Input: String="abdabca", Pattern="abc"
+// Output: "abc"
+// Explanation: The smallest substring having all characters of the pattern is "abc".
 
 function findSmallestContainer(str, pattern) {
-  let firstIdx = -1,
-    lastIdx = -1,
-    matched = 0
-
-  const set = new Set()
+  // build map { char: freq } out of pattern
+  const patternMap = {}
   for (let char of pattern) {
-    set.add(char)
+    if (!(char in patternMap)) patternMap[char] = 0
+    patternMap[char]++
   }
 
+  // keep track of matched
+  let matched = 0
+  // keep track of curSmallest
+  let curSmallest = ''
+  // start sliding window
   let windowStart = 0
-  let smallestWindowSize = Infinity
-  const freq = {}
   for (let windowEnd = 0; windowEnd < str.length; windowEnd++) {
-    let curChar = str[windowEnd]
+    let newChar = str[windowEnd]
 
-    if (!(curChar in freq)) freq[curChar] = 0
-    freq[curChar]++
+    if (newChar in patternMap) {
+      patternMap[newChar]--
 
-    if (set.has(curChar) && freq[curChar] === 1) matched++
+      if (patternMap[newChar] === 0) matched++
+    }
 
-    while (matched === set.size) {
-      let curWindowSize = windowEnd - windowStart + 1
+    // is current window is valid
+    while (matched === Object.keys(patternMap).length) {
+      // cur window is valid
+      let windowSize = windowEnd - windowStart + 1
 
-      if (curWindowSize < smallestWindowSize) {
-        smallestWindowSize = curWindowSize
-        firstIdx = windowStart
-        lastIdx = windowEnd
+      if (curSmallest === '' || windowSize < curSmallest.length) {
+        curSmallest = str.substr(windowStart, windowSize)
       }
-      // find a smaller window
-      let firstChar = str[windowStart]
-      freq[firstChar]--
-      if (freq[firstChar] === 0) {
-        delete freq[firstChar]
 
-        if (set.has(firstChar)) matched--
+      // can we find better substr? shrink cur window
+      const firstChar = str[windowStart]
+
+      if (firstChar in patternMap) {
+        patternMap[firstChar]++
+
+        if (patternMap[firstChar] > 0) matched--
       }
+
       windowStart++
     }
   }
 
-  return firstIdx > 0 ? str.substring(firstIdx, lastIdx + 1) : ''
+  // return curSmallest
+  return curSmallest
 }
 
 module.exports = {findSmallestContainer}
