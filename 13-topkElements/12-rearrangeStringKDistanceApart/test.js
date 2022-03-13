@@ -20,3 +20,10 @@ test('it works 3', () => {
   const result = rearrangeString(str, k)
   expect(result).toEqual('aba')
 })
+
+test('it works 4', () => {
+  const str = 'aappa',
+    k = 3
+  const result = rearrangeString(str, k)
+  expect(result).toEqual('')
+})
