@@ -47,3 +47,17 @@ export class Queue<T> extends Array {
         return this.length;
     }
 }
+
+export class Stack<T> extends Array {
+    pushItem(item: T) {
+        this.push(item)
+    }
+
+    popItem(): T | undefined {
+        return this.pop();
+    }
+
+    get size() {
+        return this.length;
+    }
+}
